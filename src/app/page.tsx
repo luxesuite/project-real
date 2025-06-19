@@ -14,6 +14,7 @@ export default function Home() {
   return (
    
     <div className=" ">
+       <div className="gtranslate_wrapper" style={{ padding: '10px' }} />
       {/* <LanguageSelector /> */}
        {/* <LanguageSelector /> */}
      <HeaderForLandingPage/>
