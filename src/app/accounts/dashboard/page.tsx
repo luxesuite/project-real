@@ -7,7 +7,7 @@ import { MdHistory } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 
 
-const actionClass = " md:py-4 py-2  md:px-4 px-2 flex flex-col items-center justify-between  mdlg:text-md text-[0.8rem] hover:bg-primary rounded-md hover:text-white"
+const actionClass = " md:py-4 py-2  md:px-4 px-2 flex flex-col items-center justify-between  mdlg:text-md md:text-[0.7] text-[0.6rem] hover:bg-primary rounded-md hover:text-white"
 const statsClass = " w-[48%] mdlg:h-[100px] lg:h-[120px] h-[100px] mdlg:py-4 py-4  py-2 lg:text-lg mdlg:text-md text-[0.9rem] lg:px-4 px-2 flex flex-col rounded-lg justify-between "
 const page = () => {
 
@@ -64,7 +64,7 @@ const page = () => {
 {/* Investment Plans */}
           <div className={`${actionClass}`}>
            <span> <ImStatsBars2 className='text-xl'/></span>
-           <span className='text-center'>Investments Plans</span>
+           <span className='text-center '>Investments Plans</span>
           </div>
 {/* History */}
           <div className={`${actionClass}`}>

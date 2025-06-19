@@ -11,7 +11,7 @@ import { GiConcentricCrescents } from "react-icons/gi";
     })
   return (
     <div className='flex  flex-col  h-screen items-center pt-16'>
-            <section className='lg:w-[50%] md:w-[75%] w-[90%]   px-4'>
+            <section className='lg:w-[50%] md:w-[75%] w-[90%]   '>
                   <div className='flex justify-center'>
     <Link href={"/"} className='flex items-center '>
     < GiConcentricCrescents className='text-primary' size={43}/>
@@ -30,7 +30,7 @@ import { GiConcentricCrescents } from "react-icons/gi";
       {/* Form */}
 
 
-<form action="">
+<form action="" className=''>
 
     {/*full name, username , email */}
     {/* full name */}

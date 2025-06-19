@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 const NavbarForAccounts = () => {
   const dispatch = useDispatch<appDispatch>()
   return (
-    <div className='flex justify-between mt-10 lg:px-8 px-2 '>
+    <div className='flex justify-between mt-10 lg:px-8 px-2  mb-6'>
 
 <button
   onClick={()=> dispatch(openMenu()) }

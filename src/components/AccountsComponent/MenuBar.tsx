@@ -64,7 +64,11 @@ else{
 <div>
 {/* Dashboard */}
 <button className={buttonClass} 
-onClick={()=> router.push("/accounts/dashboard")}
+onClick={()=> {
+    router.push("/accounts/dashboard")
+    dispatch(closeMenu())
+}
+}
 >
     <span><IoHomeOutline className={iconClass}/></span>
     <span>Dashboard</span>
@@ -72,7 +76,12 @@ onClick={()=> router.push("/accounts/dashboard")}
 {/* Investments */}
     
 <button className={buttonClass}
-onClick={()=> router.push("/accounts/trades")}
+onClick={()=> {
+
+    router.push("/accounts/trades")
+    dispatch(closeMenu())
+
+}}
 
 >
     <span><IoHomeOutline className={iconClass}/></span>
@@ -85,35 +94,63 @@ onClick={()=> router.push("/accounts/trades")}
 <div className='my-4'>
     {/* deposits */}
     <button className={buttonClass}
-    onClick={()=> router.push("/accounts/deposit-method")}
+    onClick={()=> 
+    {
+        router.push("/accounts/deposit-method")
+        dispatch(closeMenu())
+    }    
+    
+    }
     >
     <span><IoHomeOutline className={iconClass}/></span>
     <span>Deposit</span>
 </button>
     {/* withdrawals */}
     <button className={buttonClass}
-    onClick={()=> router.push("/accounts/withdraw")}
+    onClick={()=> 
+    {
+
+        router.push("/accounts/withdraw")
+        dispatch(closeMenu())
+    }
+    }
     >
     <span><IoHomeOutline className={iconClass}/></span>
     <span>withdrawals</span>
 </button>
     {/* Transaction History */}
     <button className={buttonClass}
-    onClick={()=> router.push("/accounts/history")}
+    onClick={()=> {
+        router.push("/accounts/history")
+        dispatch(closeMenu())
+    }
+}
     >
     <span><IoHomeOutline className={iconClass}/></span>
     <span>Transaction History</span>
 </button>
     {/* All Investments */}
     <button className={buttonClass}
-    onClick={()=> router.push("/accounts/investment-history")}
+    onClick={()=>
+    {
+        router.push("/accounts/investment-history")
+        dispatch(closeMenu())
+
+    }
+    }
     >
     <span><IoHomeOutline className={iconClass}/></span>
     <span>All Investments</span>
 </button>
     {/* Settings */}
     <button className={buttonClass}
-    onClick={()=> router.push("/accounts/settings")}
+    onClick={()=> 
+    {
+
+        router.push("/accounts/settings")
+        dispatch(closeMenu())
+    }
+    }
     >
     <span><IoHomeOutline className={iconClass}/></span>
     <span>Settings</span>
