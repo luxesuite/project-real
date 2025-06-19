@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Link from 'next/link';
 import { FaStarOfLife } from "react-icons/fa";
 import { GiConcentricCrescents } from "react-icons/gi";
-export const page = () => {
+ const page = () => {
 
     const [showPassword,setShowPassword] = useState({
         password:false,
