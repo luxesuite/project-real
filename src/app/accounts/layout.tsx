@@ -1,3 +1,4 @@
+import DesktopSideBar from '@/components/AccountsComponent/DesktopSideBar';
 import { MenuBar } from '@/components/AccountsComponent/MenuBar';
 import NavbarForAccounts from '@/components/AccountsComponent/NavbarForAccounts';
 import React from 'react'
@@ -11,7 +12,10 @@ const layout = ({
     <div>
         <NavbarForAccounts/>
         <MenuBar/>
+        <div className='flex'>
+<DesktopSideBar/>
         {children}
+        </div>
         
         </div>
   )

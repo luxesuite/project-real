@@ -8,6 +8,7 @@ import NumberStats from "@/components/LandingPageComponents/NumberStats";
 import OurFeatures from "@/components/LandingPageComponents/OurFeatures";
 import StableAndSafeComponent from "@/components/LandingPageComponents/StableAndSafeComponent";
 import { StatsForLandingPage } from "@/components/LandingPageComponents/StatsForLandingPage";
+import Sponsors from "@/components/Sponsors";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
      <InvestmentPlansComponent/>
      <NumberStats/>
      <LiveUpdates/>
+     <Sponsors/>
      <Footer/>
     </div>
 

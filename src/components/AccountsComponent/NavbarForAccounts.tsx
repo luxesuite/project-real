@@ -8,13 +8,13 @@ import { useDispatch } from 'react-redux';
 const NavbarForAccounts = () => {
   const dispatch = useDispatch<appDispatch>()
   return (
-    <div className='flex justify-between'>
+    <div className='flex justify-between mt-10 lg:px-8 px-2 '>
 
 <button
   onClick={()=> dispatch(openMenu()) }
-><IoMenuOutline className='text-[2rem] '/></button>
+><IoMenuOutline className='text-[2rem] lg:hidden'/></button>
 
-<aside className='flex items-center w-[30%] justify-between'>
+<aside className='flex items-center lg:w-[10%] md:w-[15%] w-[30%] justify-between'>
     <span className='text-[1.1rem] bg-grayUtil rounded-full px-4 py-2 '>Kris</span>
     <button className='relative px-2'>
 <IoNotifications className='text-[2rem] text-grayUtil' />

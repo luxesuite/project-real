@@ -51,7 +51,7 @@ Get Started
 
 <div className='lg:w-[50%] w-full mdsm:min-h-[390px]  min-h-[350px] relative my-8'>
 <Image 
-src={"/hero-image.jpg"}
+src={"/hero-image2.jpg"}
 alt='hero image'
 priority={true} 
 fill

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { appDispatch, RootState } from '@/store';
 import gsap from 'gsap';
 import { closeMenu } from '@/store/slices/menubarSlice';
+import { useRouter } from 'next/navigation';
 
 
 const buttonClass = "flex items-center py-4 gap-x-4 hover:text-primary font-medium transition-all duration-300 hover:pl-2"
@@ -14,6 +15,8 @@ const iconClass = "text-[1.2rem]"
 export const MenuBar = () => {
     const menuRef = useRef<HTMLDivElement | null>(null)
     const dispatch = useDispatch<appDispatch>()
+
+    const router =useRouter()
 const menuState = useSelector((state:RootState)=>{
     return state.menuBar
 })
@@ -43,7 +46,7 @@ else{
 
 
   return (
-    <div ref={menuRef} className='fixed top-0 left-[0%] h-full bg-white w-[70%]  pt-16 px-4 opacity-0'>
+    <div ref={menuRef} className='fixed top-0 left-[0%] h-full bg-white w-[70%]  pt-16 px-4 opacity-0 '>
         {/* arrow */}
         <div className='flex items-end justify-end mb-6'>
             <button 
@@ -60,13 +63,18 @@ else{
 {/* dashboard and investments sections */}
 <div>
 {/* Dashboard */}
-<button className={buttonClass}>
+<button className={buttonClass} 
+onClick={()=> router.push("/accounts/dashboard")}
+>
     <span><IoHomeOutline className={iconClass}/></span>
     <span>Dashboard</span>
 </button>
 {/* Investments */}
     
-<button className={buttonClass}>
+<button className={buttonClass}
+onClick={()=> router.push("/accounts/trades")}
+
+>
     <span><IoHomeOutline className={iconClass}/></span>
     <span>Investments</span>
 </button>
