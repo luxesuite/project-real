@@ -48,7 +48,7 @@ export default function RootLayout({
       <body
         className={`font-jakarta text-[0.8rem] `}
         >
-           {/* <div className="gtranslate_wrapper" style={{ padding: '10px' }} /> */}
+           <div className="gtranslate_wrapper" style={{ padding: '10px' }} />
         {children}
        
       </body>

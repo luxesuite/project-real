@@ -84,27 +84,37 @@ onClick={()=> router.push("/accounts/trades")}
 {/* other section */}
 <div className='my-4'>
     {/* deposits */}
-    <button className={buttonClass}>
+    <button className={buttonClass}
+    onClick={()=> router.push("/accounts/deposit-method")}
+    >
     <span><IoHomeOutline className={iconClass}/></span>
     <span>Deposit</span>
 </button>
     {/* withdrawals */}
-    <button className={buttonClass}>
+    <button className={buttonClass}
+    onClick={()=> router.push("/accounts/withdraw")}
+    >
     <span><IoHomeOutline className={iconClass}/></span>
     <span>withdrawals</span>
 </button>
     {/* Transaction History */}
-    <button className={buttonClass}>
+    <button className={buttonClass}
+    onClick={()=> router.push("/accounts/history")}
+    >
     <span><IoHomeOutline className={iconClass}/></span>
     <span>Transaction History</span>
 </button>
     {/* All Investments */}
-    <button className={buttonClass}>
+    <button className={buttonClass}
+    onClick={()=> router.push("/accounts/investment-history")}
+    >
     <span><IoHomeOutline className={iconClass}/></span>
     <span>All Investments</span>
 </button>
     {/* Settings */}
-    <button className={buttonClass}>
+    <button className={buttonClass}
+    onClick={()=> router.push("/accounts/settings")}
+    >
     <span><IoHomeOutline className={iconClass}/></span>
     <span>Settings</span>
 </button>

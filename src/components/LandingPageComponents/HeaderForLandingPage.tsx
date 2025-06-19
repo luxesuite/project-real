@@ -69,7 +69,7 @@ else{
       <Link href={"/"} className='hover:text-primary transition-all text-[0.7rem]' >Home</Link>
       <Link href={"/about"} className='hover:text-primary transition-all text-[0.7rem]'>About Us</Link>
       <Link href={"/faqs"} className='hover:text-primary transition-all text-[0.7rem]'>FAQS</Link>
-      <Link href={"/#"} className='hover:text-primary transition-all text-[0.7rem]'>Contact Us</Link>
+      <Link href={"/"} className='hover:text-primary transition-all text-[0.7rem]'>Contact Us</Link>
     </nav>
   
 {/* NavLinks for Mobile */}
@@ -79,18 +79,18 @@ else{
 
       <Link href={"/"} className={`font-semibold h-[60px] transition-all flex items-center gap-x-[3px] px-6 ${hoverClass}`} ><IoHomeOutline size={23}/> Home</Link>
       <Link href={"/about"}className={`font-semibold h-[60px] transition-all flex items-center gap-x-[3px] px-6 ${hoverClass}`}><RiQuestionLine size={23}/> About Us</Link>
-      <Link href={"/about"}className={`font-semibold h-[60px] transition-all flex items-center gap-x-[3px] px-6 ${hoverClass}`}><IoLogInOutline size={23}/> Login</Link>
-      <Link href={"/about"} className={`font-semibold h-[60px] transition-all flex items-center gap-x-[3px] px-6 ${hoverClass}`}><IoLogInOutline size={23}/> Sign Up</Link>
+      <Link href={"/sign-in"}className={`font-semibold h-[60px] transition-all flex items-center gap-x-[3px] px-6 ${hoverClass}`}><IoLogInOutline size={23}/> Login</Link>
+      <Link href={"/sign-up"} className={`font-semibold h-[60px] transition-all flex items-center gap-x-[3px] px-6 ${hoverClass}`}><IoLogInOutline size={23}/> Sign Up</Link>
       <Link href={"/faqs"}className={`font-semibold h-[60px] transition-all flex items-center gap-x-[3px] px-6 ${hoverClass}`}><RiQuestionLine size={23}/> FAQS</Link>
-      <Link href={"/#"}  className={`h-[60px] transition-all flex items-center gap-x-[3px] px-6 text-primary font-semibold font-semibold text-xl gap-x-[3px] hover:px-2 hover:rounded-md hover:text-xl`}><GrContact size={23}/> Contact Us</Link>
+      <Link href={"/"}  className={`h-[60px] transition-all flex items-center gap-x-[3px] px-6 text-primary font-semibold font-semibold text-xl gap-x-[3px] hover:px-2 hover:rounded-md hover:text-xl`}><GrContact size={23}/> Contact Us</Link>
       </div>
 
     </div>
 
 
-    <aside className=' flex items-center  lg:w-[23%] justify-between'>
-  <Link href={"sign-up"} className='hidden lg:inline border-[1px] border-primary rounded-full w-[35%] text-center py-[10px]' >Sign Up</Link>
-  <Link href={"/sign-in"} className='hidden lg:inline  rounded-full w-[35%] text-center py-[10px] bg-primary text-white'>Sign In</Link>
+    <aside className=' flex items-center  lg:w-[18%] justify-between'>
+  <Link href={"sign-up"} className='hidden lg:inline border-[1px] border-primary rounded-full w-[45%] text-center py-[10px]' >Sign Up</Link>
+  <Link href={"/sign-in"} className='hidden lg:inline  rounded-full w-[45%] text-center py-[10px] bg-primary text-white'>Sign In</Link>
   {/* <select name="" id="" className='border-none outline-none rounded-lg '>
       <option value="">NIG</option>
       <option value="">ENG</option>
@@ -109,7 +109,7 @@ else{
   </select> */}
   {/* <Flag code="us" style={{ width: 50 }} />
   <Flag code="fr" style={{ width: 50 }} /> */}
-  <Dropdown/>
+  {/* <Dropdown/> */}
   <button className='lg:hidden cursor-pointer ml-4' onClick={()=> setShowMenu(true)}>< IoIosMenu size={35}/></button>
 </aside>
 {/* <NavLinks/>
