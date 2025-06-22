@@ -15,6 +15,9 @@ const iconClass = "text-[1.2rem]"
 export const MenuBar = () => {
     const menuRef = useRef<HTMLDivElement | null>(null)
     const dispatch = useDispatch<appDispatch>()
+      const user = useSelector((store:RootState)=>{
+    return store.userReducer
+      })
 
     const router =useRouter()
 const menuState = useSelector((state:RootState)=>{
@@ -56,7 +59,7 @@ else{
         {/* Profile */}
         <div className='flex flex-col items-center gap-y-2'>
 <span className='bg-grayUtil p-6 rounded-full'><FaUserLarge className='text-[1.5rem]'/></span>
-<span className='text-[0.87rem]'>{"chris"}</span>
+<span className='text-[0.87rem] capitalize'>{user.username}</span>
 <button className='w-[90%] bg-primary py-[10px] rounded-full text-[1rem]'>0$</button>
         </div>
 

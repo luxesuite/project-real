@@ -1,10 +1,12 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoIosWallet } from "react-icons/io";
 import { IoCardOutline } from "react-icons/io5";
 import { ImStatsBars2 } from "react-icons/im";
 import { MdHistory } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store';
 
 
 const actionClass = " md:py-4 py-2  md:px-4 px-2 flex flex-col items-center justify-between  mdlg:text-md md:text-[0.7] text-[0.6rem] hover:bg-primary rounded-md hover:text-white"
@@ -12,10 +14,18 @@ const statsClass = " w-[48%] mdlg:h-[100px] lg:h-[120px] h-[100px] mdlg:py-4 py-
 const page = () => {
 
   const [investMent,setInvestment] = useState<boolean>(false)
+
+  const user = useSelector((store:RootState)=>{
+return store.userReducer
+  })
+//   useEffect(()=>{
+// console.log(user);
+
+//   },[])
   return (
     <div className=' lg:w-[80%] w-[100%] '>
         <div className='lg:w-[50%] w-[95%] flex flex-col items-center mt-16 gap-y-8   mx-auto lg:mx-0'>
-   <h1 className='text-2xl text center'>Welcome chris</h1>
+   <h1 className='text-2xl text center capitalize'>Welcome {user.username}</h1>
 {/* BALANCE SHOW */}
    <section className='flex justify-between items-center lg:w-[20%] w-[25%] text-2xl '>
     <aside className='flex gap-x-[3px] items-center text-primary'><span><IoIosWallet/></span> <span>$0</span></aside>

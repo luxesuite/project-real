@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Script from 'next/script';
 import { ReduxProvider } from "@/components/ReduxProvider";
+import Modal from "@/components/Modal";
+import ProviderQuery from "@/components/ProviderQuery";
+import SmartSupp from "@/components/SmartSupp";
+import UserSlider from "@/components/UserSlide";
 
 export const metadata: Metadata = {
   title: "Real Vista",
@@ -16,6 +20,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+       <ProviderQuery>
+      <ReduxProvider>
         <head>
 
 <Script id="gtranslate-init" strategy="afterInteractive">
@@ -43,17 +49,22 @@ export default function RootLayout({
   src="https://cdn.gtranslate.net/widgets/latest/float.js"
   strategy="afterInteractive"
 />
+{/* SmartSupp */}
+
+        <SmartSupp/>
       </head>
-      <ReduxProvider>
+
+     
       <body
         className={`font-jakarta text-[0.8rem] `}
         >
            {/* <div className="gtranslate_wrapper" style={{ padding: '10px' }} /> */}
+       <Modal/>
+       <UserSlider/>
         {children}
-       
       </body>
           </ReduxProvider>
-        
+          </ProviderQuery>
     </html>
   );
 }

@@ -12,6 +12,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
     // images:{
     //     domains:['flagcdn.com']
     // }
