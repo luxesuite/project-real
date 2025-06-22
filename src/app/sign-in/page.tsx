@@ -9,10 +9,13 @@ import { appDispatch } from '@/store';
 import { useMutation } from '@tanstack/react-query';
 import Loader from '@/components/Loader';
 import { useRouter } from 'next/navigation';
+import { addUserInfo } from '@/store/slices/userSlice';
 
 const domainAddress = process.env.NEXT_PUBLIC_DOMAIN_ADDRESS
 
 const signIn = async(formDetails:any)=>{
+
+
 
     const res = await fetch(`${domainAddress}/api/sign-in`,{
         method:"POST",
@@ -32,9 +35,11 @@ const page = () => {
         onSuccess:(data)=>{
                 console.log(data);
                 if (data.success) {
+                    localStorage.setItem("token",JSON.stringify(data.token))
+                    localStorage.setItem("user",JSON.stringify(data.data))
+                    dispatch(addUserInfo({username:data.data.username,email:data.data.email}))
                 router.push("/accounts/dashboard")
-                localStorage.setItem("token",JSON.stringify(data.token))
-                localStorage.setItem("user",JSON.stringify(data.data))
+
                 return
                 }
                 if (data.message) {

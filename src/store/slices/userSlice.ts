@@ -1,20 +1,28 @@
-"use client"
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 
-const initialState = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : null
+const initialState = {
+    username:"",
+    email:""
+}
 const userSlice = createSlice({
     name:"userSlice",
     initialState,
     reducers:{
+        addUserInfo:(state,actions:PayloadAction<any>)=>{
+return actions.payload
+        },
         clearState:(()=>{
         localStorage.clear()
 
-        return null
+        return {
+            username:"",
+            email:""
+        }
     })
     }
 })
 
-export const {clearState} = userSlice.actions
+export const {clearState,addUserInfo} = userSlice.actions
 const userReducer = userSlice.reducer
 export default userReducer

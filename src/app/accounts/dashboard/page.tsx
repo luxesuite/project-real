@@ -15,6 +15,7 @@ const page = () => {
 
   const [investMent,setInvestment] = useState<boolean>(false)
 
+  
   const user = useSelector((store:RootState)=>{
 return store.userReducer
   })
