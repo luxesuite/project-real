@@ -4,9 +4,9 @@ import bcrypt from "bcryptjs"
 import { NextRequest,NextResponse } from "next/server"
 
 
-export const PUT = async(req:NextRequest,{params}:{params:{id:string}})=>{
+export const PUT = async(req:NextRequest,{params}:{params:Promise<{id:string}>})=>{
 const formDetails = await req.json()
-const {id} = params
+const {id} =await params
   try {
      const dbCheck = await connectDb()
    if (!dbCheck.success) {
