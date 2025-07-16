@@ -1,8 +1,15 @@
 "use client"
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
-   userDetails:null,
+const initialState: {userDetails: any;
+    investment: never[];
+    bonus: never[];
+    deposit: never[];
+    notification: never[];
+    withdrawal: never[];} | any = {
+   userDetails:{name:"",
+username:"",
+email:""},
     investment:[],
     bonus:[],
     deposit:[],
@@ -11,21 +18,24 @@ const initialState = {
 
 
 }
+// localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : initialState
 const userSlice = createSlice({
     name:"userSlice",
-    initialState:localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") as string) : initialState ,
+    initialState:initialState ,
     reducers:{
         addUserInfo:(state,actions:PayloadAction<any>)=>{
 return actions.payload
         },
         clearState:(()=>{
-        localStorage.clear()
+        // localStorage.clear()
 
         return {
-            username:"",
-            email:"",
+            userDetails:null,
             investment:[],
-            bonus:[]
+            bonus:[],
+            deposit:[],
+            notification:[],
+            withdrawal:[],
         }
     })
     }
