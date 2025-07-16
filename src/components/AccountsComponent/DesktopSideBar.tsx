@@ -32,14 +32,14 @@ onClick={()=> router.push("/accounts/dashboard")}
     <span><IoHomeOutline className={iconClass}/></span>
     <span>Dashboard</span>
 </button>
-{/* Investments */}
+{/* Invest */}
     
 <button className={buttonClass}
 onClick={()=> router.push("/accounts/trades")}
 
 >
     <span><IoHomeOutline className={iconClass}/></span>
-    <span>Investments</span>
+    <span>Invest</span>
 </button>
 </div>
 

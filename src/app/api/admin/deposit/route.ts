@@ -1,0 +1,71 @@
+import connectDb from "@/db/dbconnect";
+import Deposit from "@/models/depositModel";
+import User from "@/models/userModel";
+
+import { NextRequest, NextResponse } from "next/server";
+
+
+
+
+export const POST =async(req:NextRequest):Promise<NextResponse>=>{
+    const formDetails =await req.json()
+   const dbCheck = await connectDb()
+   if (!dbCheck.success) {
+    return NextResponse.json({message:"cant connect to database, please try again later",success:false})
+   }
+    
+    try {
+     
+        // check user exist by name
+        const checkIfUserExistInDbByUsername = await User.exists({username:formDetails.username})
+        if (!checkIfUserExistInDbByUsername) {
+            return NextResponse.json({message:"no user with this username",success:false})
+        }
+
+    
+const createNewDeposit = await Deposit.create(formDetails)
+
+if (createNewDeposit) {
+    return NextResponse.json({data:createNewDeposit,success:true,message:"you have successfully added new deposit"})
+}
+else{
+    return NextResponse.json({data:null,success:false,message:"cant add deposit now,please try again later"})
+}
+
+} catch (error) {
+    console.log(error);
+    
+    return NextResponse.json({data:null,success:false,message:"an error occured, please please try again later"})
+    }
+
+// console.log(formDetails);
+//  return NextResponse.json({success:true})
+
+}
+
+
+
+
+export const GET = async()=>{
+
+       const dbCheck = await connectDb()
+       if (!dbCheck.success) {
+        return NextResponse.json({message:"cant connect to database, please try again later",success:false})
+    }
+    
+    try {
+    const getDeposits = await Deposit.find({})
+    if (!getDeposits) {
+        return NextResponse.json({message:"an error ocurred , can't fetch deposits",success:false})
+        
+    }
+
+    return NextResponse.json({data:getDeposits,success:true})
+
+} catch (error) {
+    
+        return NextResponse.json({message:"an error occured please try again later",success:false})
+}
+
+
+}

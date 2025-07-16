@@ -3,6 +3,11 @@ import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import jwt from 'jsonwebtoken';
 import bcrypt  from "bcryptjs";
+import Investment from "@/models/investmentModel";
+import Bonus from "@/models/bonusModel";
+import Withdrawal from "@/models/withdrawalModel";
+import Notification from "@/models/notificationModel";
+import Deposit from "@/models/depositModel";
 
 
 export const POST = async (req:NextRequest)=>{
@@ -35,10 +40,30 @@ else{
     const createdToken = jwt.sign({username:checkIfUserExists.username,email:checkIfUserExists.email},process.env.JSON_SECRET  as string,{
         expiresIn:"10m"
     })
+
+    // Investment
+    const getUserInvestment = await Investment.find({username:checkIfUserExists.username})
+    // bonus
+    const getUserBonus = await Bonus.find({username:checkIfUserExists.username})
+    // Withdrawal
+    const getUserWithdrawal = await Withdrawal.find({username:checkIfUserExists.username})
+    // Notificatioon
+    const getUserNotification = await Notification.find({username:checkIfUserExists.username})
+    // deposit
+    const getUserDepoit = await Deposit.find({username:checkIfUserExists.username})
+    
     return NextResponse.json({message:"Login successful",
     success:true,
     token:createdToken,
-    data:checkIfUserExists
+    data:{
+        userDetails:checkIfUserExists,
+        investment:getUserInvestment ? getUserInvestment : [],
+        bonus:getUserBonus ? getUserBonus : [],
+        deposit:getUserDepoit ? getUserDepoit : [],
+        withdrawal:getUserWithdrawal ? getUserWithdrawal : [],
+        notification:getUserNotification ? getUserNotification : [],
+    },
+
     })
     
 }

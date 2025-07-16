@@ -1,9 +1,25 @@
 "use client"
-import React, { useState } from 'react'
+import { RootState } from '@/store';
+import React, { useEffect, useState } from 'react'
 import { IoMdArrowUp } from "react-icons/io";
 import { IoMdArrowDown } from "react-icons/io";
+import { useSelector } from 'react-redux';
+import { FaCheckCircle } from "react-icons/fa";
+import { BsExclamationCircleFill } from "react-icons/bs";
  const page = () => {
-    const [depositActive,setDepositActive] = useState<boolean>(false)
+    const [depositActive,setDepositActive] = useState<boolean>(true)
+    const userState = useSelector((store:RootState)=>{
+
+        return store.userReducer
+    })
+
+
+    useEffect(()=>{
+        console.log(depositActive);
+        console.log(userState);
+        
+    },[depositActive])
+
   return (
         <div className=' lg:w-[80%] w-[100%] '>
     
@@ -24,12 +40,35 @@ import { IoMdArrowDown } from "react-icons/io";
 <div className='py-4'>
     {/* for Deposti */}
     {depositActive && (
-        <p>No Transaction History</p>
+        <>
+        {userState.deposit.length < 1 && <p>No Transaction History</p>}
+        {userState.deposit.length > 0 &&  userState.deposit.map((item:any,index:number)=>{
+            return <div key={index} className='flex justify-between items-center bg-gray-300 p-4 rounded-lg my-3'>
+                <span>{item.date.split(",")[0]}</span>
+                <span>${item.amount}</span>
+                <span>< FaCheckCircle className='text-green-500'/></span>
+            </div>
+        })}
+        </>
     )}
     {!depositActive && (
-        <p>No Withdrawal History</p>
+        // <p>No Withdrawal History</p>
+
+                <>
+        {userState.withdrawal.length < 1 && <p>No Transaction History</p>}
+        {userState.withdrawal.length > 0 &&  userState.withdrawal.map((item:any,index:number)=>{
+            return <div key={index} className='flex justify-between items-center bg-gray-300 p-4 rounded-lg my-3'>
+                <span>{item.date.split(",")[0]}</span>
+                <span>${item.amount}</span>
+                <span>{item.confirmed == "yes" ? < FaCheckCircle className='text-green-500'/> : <BsExclamationCircleFill className='text-orange-400'/>}</span>
+            </div>
+        })}
+        </>
     )}
 </div>
+
+
+
 </div>
              </div>
   )

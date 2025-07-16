@@ -1,6 +1,7 @@
 "use client"
 import { appDispatch, RootState } from '@/store'
-import { updateUsers } from '@/store/slices/allUsersSlice'
+import { updateUsers } from '@/store/admin-slices/allUsers'
+// import { updateUsers } from '@/store/slices/allUsersSlice'
 import { useQuery } from '@tanstack/react-query'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'

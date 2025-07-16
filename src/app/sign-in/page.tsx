@@ -10,6 +10,7 @@ import { useMutation } from '@tanstack/react-query';
 import Loader from '@/components/Loader';
 import { useRouter } from 'next/navigation';
 import { addUserInfo } from '@/store/slices/userSlice';
+import BtnLoader from '../../../utils/BtnLoader';
 
 const domainAddress = process.env.NEXT_PUBLIC_DOMAIN_ADDRESS
 
@@ -37,7 +38,9 @@ const page = () => {
                 if (data.success) {
                     localStorage.setItem("token",JSON.stringify(data.token))
                     localStorage.setItem("user",JSON.stringify(data.data))
-                    dispatch(addUserInfo({username:data.data.username,email:data.data.email}))
+                    dispatch(addUserInfo(data.data))
+                    console.log(data);
+                    
                 router.push("/accounts/dashboard")
 
                 return
@@ -146,7 +149,7 @@ console.log(formDetails);
 <div className='flex justify-end'>
     <button type='submit'
     disabled = {mutation.isPending ? true : false}
-    className='font-medium text-white bg-primary rounded-full px-4 py-[5px]'>{mutation.isPending ? <Loader/> : "Login"}</button>
+    className='font-medium text-white bg-primary rounded-full px-8 py-[5px]'>{mutation.isPending ? <BtnLoader/> : "Login"}</button>
 </div>
 </form>
             </section>

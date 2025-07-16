@@ -9,6 +9,7 @@ import { openModal } from '@/store/slices/modalSlice';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import Loader from '@/components/Loader';
+import BtnLoader from '../../../utils/BtnLoader';
 
 const domainAddress = process.env.NEXT_PUBLIC_DOMAIN_ADDRESS
 
@@ -213,7 +214,7 @@ console.log(formDetails);
 <div className='flex justify-end'>
     <button type='submit'
     disabled = {mutation.isPending ? true : false}
-    className='font-medium text-white bg-primary rounded-full px-4 py-[5px] flex items-center justify-center cursor-pointer'>{mutation.isPending ? <Loader/> : "Register"}</button>
+    className='font-medium text-white bg-primary rounded-full px-8 py-[5px] flex items-center justify-center cursor-pointer'>{mutation.isPending ? <BtnLoader/> : "Register"}</button>
 </div>
 </form>
             </section>

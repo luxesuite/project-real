@@ -44,6 +44,7 @@ else{
 }
 
 } catch (error) {
+    console.log(error);
     
     return NextResponse.json({data:null,success:false,message:"an error occured please"})
     }

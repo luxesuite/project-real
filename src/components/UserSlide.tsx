@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { CiBellOn } from "react-icons/ci";
 import gsap from 'gsap';
+import { usePathname } from 'next/navigation';
 
 interface User {
   name: string;
@@ -21,10 +22,15 @@ export default function UserSlider() {
     { name: 'Carlos Silva', country: 'Brazil', timeSpent: '$1856' },
     { name: 'Emma Johnson', country: 'Canada', timeSpent: '$577' }
   ];
-
+const pathname = usePathname()
   const bannerRef = useRef<HTMLDivElement>(null);
   const currentIndex = useRef(0);
 
+
+  useEffect(()=>{
+console.log(pathname);
+
+  },[])
   useEffect(() => {
     const banner = bannerRef.current;
     if (!banner) return;
@@ -76,9 +82,13 @@ export default function UserSlider() {
   }, []);
 
   return (
-    <div 
+    <>
+    {pathname.includes("admin") ? "" : (
+      <div 
       ref={bannerRef} 
       className="fixed top-[15%] left-0 transform -translate-y-1/2 z-50"
     />
+    )}
+    </>
   );
 }

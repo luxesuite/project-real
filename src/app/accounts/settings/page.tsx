@@ -1,9 +1,36 @@
 "use client"
-import React, { useState } from 'react'
+import { appDispatch, RootState } from '@/store';
+import { openModal } from '@/store/slices/modalSlice';
+import { useMutation } from '@tanstack/react-query';
+import React, { FormEvent, useEffect, useState } from 'react'
 import { FaEye } from "react-icons/fa";
+import { useDispatch, useSelector } from 'react-redux';
+import BtnLoader from '../../../../utils/BtnLoader';
 interface passwordViewType<B>{
     newPassword:B,
     confirmPassword:B
+}
+
+const postData = async(formState:any)=>{
+    const res = await fetch(`/api/change-password/${formState.username}`,{
+        method:'PUT',
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify(formState)
+    })
+    if (!res.ok) {
+        // alert("an error occured")
+        return {
+            data:null,
+            message:"an error occured",
+            success:false
+        }
+    }
+    
+    const response = await res.json()
+return response
+    
 }
 
 const page = () => {
@@ -12,6 +39,57 @@ const page = () => {
         newPassword:false,
         confirmPassword:false
     })
+    const mutation = useMutation({
+        mutationFn:postData,
+        onSuccess:(data)=>{
+            // console.log(data);
+            // if (data.success) {
+                
+            //     return
+            // }
+            if (data.message) {
+                dispatch(openModal(data.message))
+            }
+            
+        },
+        onError:(error)=>{
+            console.log(error);
+            dispatch(openModal(error.message))
+            
+        }
+    })
+const dispatch = useDispatch<appDispatch>()
+    const [formState,setFormState] = useState({
+        newPassword:"",
+        confirmedPassword:"",
+        username:""
+    })
+    const userState = useSelector((store:RootState)=>{
+  
+          return store.userReducer
+      })
+
+
+      useEffect(()=>{
+        if (formState.username) {
+            return
+        }
+setFormState({...formState,username:userState.userDetails.username})
+
+      },[formState])
+
+
+      const handleSubmit = async(e:React.SyntheticEvent)=>{
+e.preventDefault()
+
+if (formState.newPassword != formState.confirmedPassword) {
+    dispatch(openModal("Password doesn't match"))
+    return
+}
+
+mutation.mutate(formState)
+
+      }
   return (
      <div className=' lg:w-[80%] w-[100%] '>
     
@@ -31,7 +109,7 @@ const page = () => {
     <h1 className='text-[1.05rem] font-medium '>Account Details</h1>
     <section className='flex items-center gap-x-2'>
         <div className='h-[20px] w-[20] rounded-full bg-primary'></div>
-        <h1 className='font-medium'>Kris</h1>
+        <h1 className='font-medium capitalize'>{userState.userDetails.username}</h1>
     </section>
 
     <form action="" className='my-4'>
@@ -40,18 +118,18 @@ const page = () => {
             <label htmlFor="">Full Name</label>
             <input 
             readOnly
-            className='border-1 border-gray-100 px-2 outline-none py-3 rounded-lg'
+            className='border-1 border-gray-100 px-2 outline-none py-3 rounded-lg capitalize'
             // value={"Kris"}
-            defaultValue={"KrisBake"}
-            type="text" />
+            defaultValue={userState.userDetails.name}
+            type="text " />
         </div>
         {/* Email */}
         <div className='flex flex-col gap-2 my-2'>
             <label htmlFor="">Email</label>
             <input 
             readOnly
-            className='border-1 border-gray-100 px-2 outline-none py-3 rounded-lg'
-            defaultValue={"KrisBake"}
+            className='border-1 border-gray-100 px-2 outline-none py-3 rounded-lg capitalize'
+            defaultValue={userState.userDetails.email}
             type="text" />
         </div>
         {/* Username */}
@@ -59,8 +137,8 @@ const page = () => {
             <label htmlFor="">Username</label>
             <input 
             readOnly
-            defaultValue={"KrisBake"}
-            className='border-1 border-gray-100 px-2 outline-none py-3 rounded-lg'
+            defaultValue={userState.userDetails.username}
+            className='border-1 border-gray-100 px-2 outline-none py-3 rounded-lg capitalize'
             // value={"KrisBake"}
             type="text" />
         </div>
@@ -73,7 +151,7 @@ const page = () => {
     <h1 className='text-[1.05rem] font-medium '>Update Password</h1>
 
 
-    <form action="" className='my-4'>
+    <form action="" onSubmit={handleSubmit} className='my-4'>
         {/* New Password */}
         <div className='flex flex-col gap-2 my-2'>
             <label htmlFor="">New Password</label>
@@ -81,8 +159,8 @@ const page = () => {
             <input 
             className='border-1 h-full w-full  border-gray-100 px-2 outline-none py-3 rounded-lg '
             placeholder='enter password'
-
-            // value={""}
+onChange={e => setFormState({...formState, newPassword:e.target.value})}
+            value={formState.newPassword}
             type={`${passwordView.newPassword? "text" : "password"}`} />
             <span  onClick={()=>{
                 if (passwordView.newPassword) {
@@ -104,7 +182,8 @@ const page = () => {
             <input 
             className='border-1 h-full w-full  border-gray-100 px-2 outline-none py-3 rounded-lg '
             placeholder='confirm password'
-            // value={""}
+            value={formState.confirmedPassword}
+            onChange={e => setFormState({...formState, confirmedPassword:e.target.value})}
             type={`${passwordView.confirmPassword? "text" : "password"}`} />
             <span  onClick={()=>{
                 if (passwordView.confirmPassword) {
@@ -120,7 +199,7 @@ const page = () => {
         </div>
        
        <div>
-        <button className='bg-primary px-4 py-2 text-white rounded-lg'>Update Password</button>
+        <button className='bg-primary px-4 py-2 text-white rounded-lg'>{mutation.isPending ? <BtnLoader/> : "Update Password"}</button>
        </div>
     </form>
 </div>

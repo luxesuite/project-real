@@ -88,7 +88,7 @@ onClick={()=> {
 
 >
     <span><IoHomeOutline className={iconClass}/></span>
-    <span>Investments</span>
+    <span>Invest</span>
 </button>
 </div>
 
