@@ -12,13 +12,13 @@ import { useRouter } from 'next/navigation';
 import { addUserInfo } from '@/store/slices/userSlice';
 import BtnLoader from '../../../utils/BtnLoader';
 
-const domainAddress = process.env.NEXT_PUBLIC_DOMAIN_ADDRESS
+// const domainAddress = process.env.NEXT_PUBLIC_DOMAIN_ADDRESS
 
 const signIn = async(formDetails:any)=>{
 
 
 
-    const res = await fetch(`${domainAddress}/api/sign-in`,{
+    const res = await fetch(`/api/sign-in`,{
         method:"POST",
         headers:{
             "Content-Type":"application/json"

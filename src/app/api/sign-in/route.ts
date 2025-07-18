@@ -37,8 +37,8 @@ if (!comparePassword) {
     })
 }
 else{
-    const createdToken = jwt.sign({username:checkIfUserExists.username,email:checkIfUserExists.email},process.env.JSON_SECRET  as string,{
-        expiresIn:"10m"
+    const createdToken = jwt.sign({username:checkIfUserExists.username,email:checkIfUserExists.email,role:checkIfUserExists.role},process.env.JSON_SECRET  as string,{
+        expiresIn:"1h"
     })
 
     // Investment
@@ -52,7 +52,7 @@ else{
     // deposit
     const getUserDepoit = await Deposit.find({username:checkIfUserExists.username})
     
-    return NextResponse.json({message:"Login successful",
+const response = NextResponse.json({message:"Login successful",
     success:true,
     token:createdToken,
     data:{
@@ -65,6 +65,17 @@ else{
     },
 
     })
+
+    response.cookies.set({
+        name:"token",
+        value:createdToken,
+        httpOnly:true,
+        secure:true,
+        maxAge:60 * 60,
+        path:"/"
+    })
+    
+    return response
     
 }
 
