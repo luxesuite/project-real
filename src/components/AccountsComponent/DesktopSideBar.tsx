@@ -86,7 +86,12 @@ onClick={()=> router.push("/accounts/trades")}
 {/* logout */}
 
 <div>
-        <button className={buttonClass}>
+        <button
+         onClick={()=> {
+            localStorage.clear()
+            window.location.reload()
+        }}
+        className={buttonClass}>
     <span><IoHomeOutline className={iconClass}/></span>
     <span> logout</span>
 </button>

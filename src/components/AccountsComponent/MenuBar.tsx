@@ -15,7 +15,7 @@ const iconClass = "text-[1.2rem]"
 export const MenuBar = () => {
     const menuRef = useRef<HTMLDivElement | null>(null)
     const dispatch = useDispatch<appDispatch>()
-      const user = useSelector((store:RootState)=>{
+      const userState = useSelector((store:RootState)=>{
     return store.userReducer
       })
 
@@ -23,7 +23,14 @@ export const MenuBar = () => {
 const menuState = useSelector((state:RootState)=>{
     return state.menuBar
 })
+ 
+    //   const userState = useSelector((store:RootState)=>{
+  
+    //       return store.userReducer
+    //   })
 
+
+      const totalBalance:number = userState.investment.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.profitReturn) , 0) + userState.bonus.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) + userState.deposit.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0)
 
 useEffect(()=>{
     if (!menuRef.current) {
@@ -59,8 +66,8 @@ else{
         {/* Profile */}
         <div className='flex flex-col items-center gap-y-2'>
 <span className='bg-grayUtil p-6 rounded-full'><FaUserLarge className='text-[1.5rem]'/></span>
-<span className='text-[0.87rem] capitalize'>{user.username}</span>
-<button className='w-[90%] bg-primary py-[10px] rounded-full text-[1rem]'>0$</button>
+<span className='text-[0.87rem] capitalize'>{userState.username}</span>
+<button className='w-[90%] bg-primary py-[10px] rounded-full text-[1rem]'>${totalBalance}</button>
         </div>
 
 {/* dashboard and investments sections */}
@@ -163,7 +170,12 @@ onClick={()=> {
 {/* logout */}
 
 <div>
-        <button className={buttonClass}>
+        <button
+        onClick={()=> {
+            localStorage.clear()
+            window.location.reload()
+        }}
+        className={buttonClass}>
     <span><IoHomeOutline className={iconClass}/></span>
     <span> logout</span>
 </button>
