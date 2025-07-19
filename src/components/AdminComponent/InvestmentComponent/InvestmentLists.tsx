@@ -34,6 +34,7 @@ return res.json()
 }
 const InvestmentLists = ({allInvestments}:{allInvestments:any}) => {
 
+const [historyItems,setHistoryItems] = useState<any[]>([])
 
   // Sample purchase data
   // const initialPurchases: Purchase[] = [
@@ -114,6 +115,7 @@ console.log(selectedPurchases);
   },[selectedPurchases])
   const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedPurchases(e.target.checked ? currentPurchases.map(purchase => purchase._id) : []);
+         setHistoryItems(e.target.checked ? currentPurchases : [])
   };
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -184,7 +186,19 @@ return (
                 <input 
                   type="checkbox" 
                   checked={selectedPurchases.includes(purchase._id)}
-                  onChange={(e) => handleSelectPurchase(purchase._id, e.target.checked)}
+                   onChange={(e) =>{
+ handleSelectPurchase(purchase._id, e.target.checked)
+
+ const find = historyItems.some(his => his._id == purchase._id)
+ if (find) {
+   
+   const remove = historyItems.filter(his => his._id !== purchase._id)
+   setHistoryItems([...remove])
+return
+  }
+setHistoryItems([...historyItems,purchase])
+
+                  }}
                   className="cursor-pointer h-4 w-4"
                 />
               </div>

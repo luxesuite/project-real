@@ -105,7 +105,7 @@ mutation.mutate(formDetails)
                   type="username"
                   required
                   value={formDetails.username}
-                  onChange={(e) => setFormDetails({...formDetails,username:e.target.value})}
+                  onChange={(e) => setFormDetails({...formDetails,username:e.target.value.toLocaleLowerCase()})}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
            
                 />

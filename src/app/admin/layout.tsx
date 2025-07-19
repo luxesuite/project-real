@@ -1,13 +1,16 @@
 
 "use client"
 import HeaderForAdmin from "@/components/AdminComponent/HeaderForAdmin"
-import { usePathname } from "next/navigation"
+import { appDispatch } from "@/store"
+import { addUserInfo } from "@/store/slices/userSlice"
+import { usePathname, useRouter } from "next/navigation"
+import { useDispatch } from "react-redux"
 
 
 const layout = ({children}:Readonly<{children:React.ReactNode}>)=>{
     const pathname = usePathname()
+    
 
-    console.log(pathname);
     
 
     return <div>

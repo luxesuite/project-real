@@ -18,8 +18,8 @@ const SmartSupp = () => {
           {`
             var _smartsupp = _smartsupp || {};
             _smartsupp.key = '${smartKey}';
-           ${userInfo.username ? ` _smartsupp.name = '${userInfo.username}' `: ""};
-           ${userInfo.email ? ` _smartsupp.name = '${userInfo.email}' `: ""};
+           ${userInfo.userDetails.username ? ` _smartsupp.name = '${userInfo.userDetails.username}' `: ""};
+           ${userInfo.userDetails.email ? ` _smartsupp.name = '${userInfo.userDetails.email}' `: ""};
             window.smartsupp||(function(d) {
               var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
               s=d.getElementsByTagName('script')[0];c=d.createElement('script');

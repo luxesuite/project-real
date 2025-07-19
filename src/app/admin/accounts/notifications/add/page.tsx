@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import BtnLoader from '../../../../../../utils/BtnLoader';
+import { postHistory } from '../../../../../../utils/AdminUtils/AddHistory';
 
 interface User {
   username: string;
@@ -140,7 +141,7 @@ console.log(formState);
             return
         }
         
-        
+          await postHistory({username:response.data.username,actionPerformed:"add",action:"notification"})
         setLoading(false)
         dispatch(openModal(response.message))
 } catch (error) {

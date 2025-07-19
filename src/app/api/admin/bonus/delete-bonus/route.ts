@@ -24,12 +24,14 @@ export const POST =async(req:NextRequest):Promise<NextResponse>=>{
 if (!result) {
    return NextResponse.json({
     success:false,
+    
     message: `cant delete bonus or bonus not available in the database, kindly reload the page`
     })
 }
 
 return  NextResponse.json({
         success:true,
+        data:result,
         message: `${result.deletedCount} bonuses deleted successfully`
     })
 

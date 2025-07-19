@@ -1,7 +1,14 @@
+"use client"
+import RecentActions from '@/components/AdminComponent/RecentActions';
+import { appDispatch } from '@/store';
+import { addUserInfo } from '@/store/slices/userSlice';
 import Link from 'next/link'
-import React from 'react'
+import { useRouter } from 'next/navigation';
+
+import React, { useEffect } from 'react'
 import { FaPlus } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
+import { useDispatch } from 'react-redux';
 
 const links = [
   {
@@ -52,6 +59,21 @@ id:5,
   add:"/admin/auth/users/add"
 }]
 const page = () => {
+const router = useRouter()
+const dispatch = useDispatch<appDispatch>()
+
+
+//   useEffect(()=>{
+
+//     // const user = 
+// console.log();
+// if (!localStorage.getItem("user") || JSON.parse(localStorage.getItem("user") as string).userDetails.role !== "admin") {
+//   localStorage.clear()
+//   router.push("/admin/sign-in")
+// }
+// dispatch(addUserInfo(JSON.parse(localStorage.getItem("user") as string)))
+
+//   },[])
   return (
     <div>
 <header>
@@ -103,21 +125,7 @@ const page = () => {
 
         {/* Recent Actions */}
 
-        <div className='px-2 lg:w-[20%]'>
-          <div className='bg-lightPrimary'>
-
-          <header className='border-b-1 py-2'>Recent Actions</header>
-          <h1 className='text-[1.08rem]'>My Actions</h1>
-
-          <section>
-            <aside className='py-2'>
-              <p className='flex items-center'><FaPlus className='text-green-700' /> Ouk Putkakada Investmetn</p>
-              <div>Investment</div>
-               </aside>
-          </section>
-          </div>
-        </div>
-
+<RecentActions/>
 
       </article>
     </div>

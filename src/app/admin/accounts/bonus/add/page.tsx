@@ -10,6 +10,7 @@ import Loader from '@/components/Loader';
 import { updateUsers } from '@/store/admin-slices/allUsers';
 import { openModal } from '@/store/slices/modalSlice';
 import BtnLoader from '../../../../../../utils/BtnLoader';
+import { postHistory } from '../../../../../../utils/AdminUtils/AddHistory';
 
 type PurchaseData = {
   username: string,
@@ -75,7 +76,7 @@ const dispatch = useDispatch<appDispatch>()
             return
         }
         
-        
+    await postHistory({username:response.data.username,actionPerformed:"add",action:"bonus"})
         
         setLoading(false)
         dispatch(openModal(response.message))

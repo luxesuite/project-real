@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
+import { postHistory } from '../../../utils/AdminUtils/AddHistory';
 
 
 const postData = async(formDetails:any)=>{
@@ -27,13 +28,17 @@ return res.json()
 }
 const DepositComponent = ({allDeposits}:{allDeposits:any}) => {
 
-
+const [historyItems,setHistoryItems] = useState<any[]>([])
     const dispatch = useDispatch<appDispatch>()
 const mutation = useMutation({
     mutationFn:postData,
     onSuccess:(data)=>{
         console.log(data);
         if (data.success) {
+           historyItems.forEach((item:any) => {
+                      
+                      postHistory({username:item.username,actionPerformed:"delete",action:"deposit"})
+                    });
           window.location.reload()
         }
         // if (data.message) {
@@ -79,6 +84,7 @@ const mutation = useMutation({
 
   const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedPurchases(e.target.checked ? currentPurchases.map(purchase => purchase._id) : []);
+     setHistoryItems(e.target.checked ? currentPurchases : [])
   };
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -155,7 +161,18 @@ console.log(selectedPurchases);
                 <input 
                   type="checkbox" 
                   checked={selectedPurchases.includes(item._id)}
-                  onChange={(e) => handleSelectPurchase(item._id, e.target.checked)}
+                  onChange={(e) => {
+                    handleSelectPurchase(item._id, e.target.checked)
+          const find = historyItems.some(his => his._id == item._id)
+          if (find) {
+
+          const remove = historyItems.filter(his => his._id !== item._id)
+          setHistoryItems([...remove])
+          return
+          }
+          setHistoryItems([...historyItems,item])
+                  }
+                  }
                   className="cursor-pointer h-4 w-4"
                 />
               </div>

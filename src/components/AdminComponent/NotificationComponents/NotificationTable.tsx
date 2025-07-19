@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaEnvelope, FaEnvelopeOpen, FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
+import { postHistory } from '../../../../utils/AdminUtils/AddHistory';
 
 type ActionType = 'bonus' | 'withdrawal' | 'investment' | 'signup' | 'deposit';
 
@@ -29,6 +30,7 @@ return res.json()
 
 const NotificationTable = () => {
 
+const [historyItems,setHistoryItems] = useState<any[]>([])
 const dispatch = useDispatch<appDispatch>()
 //   const [notifications, setNotifications] = useState<Notification[]>(initialNotifications);
   const [selectedNotifications, setSelectedNotifications] = useState<string[]>([]);
@@ -50,6 +52,10 @@ const mutation = useMutation({
     onSuccess:(data)=>{
         console.log(data);
         if (data.success) {
+           historyItems.forEach((item:any) => {
+                      
+                      postHistory({username:item.username,actionPerformed:"delete",action:"notification"})
+                    });
           window.location.reload()
         }
         // if (data.message) {
@@ -87,6 +93,7 @@ console.log(selectedNotifications);
 
   const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedNotifications(e.target.checked ? currentNotifications.map((notification:any) => (notification._id)) : []);
+     setHistoryItems(e.target.checked ? currentNotifications: [])
   };
 
 //   const markAsRead = (id: number) => {
@@ -185,7 +192,20 @@ console.log(selectedNotifications);
                 <input 
                   type="checkbox" 
                   checked={selectedNotifications.includes(notification._id)}
-                  onChange={(e) => handleSelectNotification(notification._id, e.target.checked)}
+                  // onChange={(e) => handleSelectNotification(notification._id, e.target.checked)}
+                     onChange={(e) =>{
+ handleSelectNotification(notification._id, e.target.checked)
+
+ const find = historyItems.some(his => his._id == notification._id)
+ if (find) {
+   
+   const remove = historyItems.filter(his => his._id !== notification._id)
+   setHistoryItems([...remove])
+return
+  }
+setHistoryItems([...historyItems,notification])
+
+                  }}
                   className="cursor-pointer"
                   onClick={(e) => e.stopPropagation()}
                 />

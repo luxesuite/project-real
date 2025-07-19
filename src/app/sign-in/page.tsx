@@ -112,7 +112,7 @@ console.log(formDetails);
     placeholder='username'
     name='username'
     onChange={(e)=>{
-        setFormDetails({...formDetails,[e.target.name]:e.target.value})
+        setFormDetails({...formDetails,[e.target.name]:e.target.value.toLocaleLowerCase()})
     }}
     type="text" />
 </div>

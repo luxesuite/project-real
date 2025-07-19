@@ -30,6 +30,7 @@ if (!result) {
 
 return  NextResponse.json({
         success:true,
+        date:result,
         message: `${result.deletedCount} deposits deleted successfully`
     })
 
