@@ -96,7 +96,7 @@ mutation.mutate(formDetails)
           <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-               usernmae
+               username
               </label>
               <div className="mt-1">
                 <input
