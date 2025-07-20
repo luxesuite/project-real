@@ -1,6 +1,7 @@
 
 "use client"
 import HeaderForAdmin from "@/components/AdminComponent/HeaderForAdmin"
+import PathsNavigator from "@/components/AdminComponent/PathsNavigator"
 import { appDispatch } from "@/store"
 import { addUserInfo } from "@/store/slices/userSlice"
 import { usePathname, useRouter } from "next/navigation"
@@ -15,6 +16,7 @@ const layout = ({children}:Readonly<{children:React.ReactNode}>)=>{
 
     return <div>
        {!pathname.includes("sign-in") &&  <HeaderForAdmin/>}
+       {!pathname.includes("sign-in") &&  <PathsNavigator/>}
         {children}
     </div>
 }

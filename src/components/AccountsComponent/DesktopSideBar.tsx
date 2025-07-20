@@ -89,7 +89,7 @@ onClick={()=> router.push("/accounts/trades")}
         <button
          onClick={()=> {
             localStorage.clear()
-            window.location.reload()
+            router.push("/")
         }}
         className={buttonClass}>
     <span><IoHomeOutline className={iconClass}/></span>

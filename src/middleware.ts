@@ -3,14 +3,29 @@ import { verifyToken } from "../utils/verifyToken";
 
 export const middleware = async(req:NextRequest)=>{
 
-// const token = req.cookies.get("token")?.value as string
+// const token = req.cookies.get("token")?.value 
 // console.log(token,"well");
+// if (!token) {
+//     const loginUrl = new URL('/admin/sign-in', req.url);
+//     return NextResponse.redirect(loginUrl);
+// }
 
-// && req.nextUrl.pathname.startsWith('/admin')
-// if (!token ) {
+// const decodeToken = await verifyToken(token)
+// console.log(decodeToken, "decoded");
+
+
+// // && req.nextUrl.pathname.startsWith('/admin')
+
+
+// if (!decodeToken) {
+//     const loginUrl = new URL('/admin/sign-in', req.url);
+//     return NextResponse.redirect(loginUrl);
+// }
+// if (decodeToken.role !== "admin" ) {
 //     const loginUrl = new URL('/admin/sign-in', req.url);
 //     return NextResponse.redirect(loginUrl);
 //   }
+
 
   
   
@@ -35,6 +50,7 @@ export const middleware = async(req:NextRequest)=>{
 
 export const config = {
   matcher:["/admin/:path*"]
+  // matcher:["/admin","admin/acoounts/bonus"]
   // matcher: ['/((?!_next/static|_next/image|favicon.ico|api|assets|\.well-known).*)'],
 };
 // export const config = {

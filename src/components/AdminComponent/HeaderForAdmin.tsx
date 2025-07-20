@@ -53,7 +53,7 @@ const [loadClient,setLoadClient] = useState(false)
   useEffect(()=>{
 
     // const user = 
-console.log(localStorage.getItem("user"));
+// console.log(localStorage.getItem("user"));
 if (localStorage.getItem("user") == null || JSON.parse(localStorage.getItem("user") as string).userDetails.role !== "admin") {
   localStorage.clear()
   router.push("/admin/sign-in")
@@ -76,7 +76,7 @@ setLoadClient(true)
 </div>
 <div className='flex gap-x-4'>
 <Link href={"/"}>View Site</Link>
-<Link href={"/"}>Change Password</Link>
+<Link href={"/admin/auth/change-password"}>Change Password</Link>
 <button onClick={handleSignOut} className='cursor-pointer'>Log out</button>
 
 

@@ -35,12 +35,12 @@ const links = [
   link:"/admin/accounts/notifications",
   add:"/admin/accounts/notifications/add"
 },
-  {
-  id:5,
-  name:"Profiles",
-  link:"/admin/accounts/bonus",
-  add:"/admin/accounts/bonus/add"
-},
+//   {
+//   id:5,
+//   name:"Profiles",
+//   link:"/admin/accounts/bonus",
+//   add:"/admin/accounts/bonus/add"
+// },
   {
   id:5,
   name:"Withdrawals",
