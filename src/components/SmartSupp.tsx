@@ -1,5 +1,6 @@
 "use client"
 import { RootState } from '@/store'
+import { usePathname } from 'next/navigation'
 import Script from 'next/script'
 import React from 'react'
 import { useSelector } from 'react-redux'
@@ -10,6 +11,12 @@ const SmartSupp = () => {
         return store.userReducer
     })
 
+const pathname = usePathname()
+
+if (pathname.includes("admin") || pathname.includes("sign-in") || pathname.includes("sign-up")) {
+  return <>
+  </>
+}
 
   return (
 <>

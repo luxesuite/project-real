@@ -90,19 +90,23 @@ console.log(userState.investment.reduce((acc:number,curr:any)=> Number(acc) + Nu
           </div>
 {/* Withdrawals */}
           <div className={`${actionClass}`}
-            onClick={()=> router.push("/withdrawal")}
+            onClick={()=> router.push("/withdraw")}
           
           >
            <span> <IoCardOutline className='text-xl'/></span>
            <span>Withdrawals</span>
           </div>
 {/* Investment Plans */}
-          <div className={`${actionClass}`}>
+          <div className={`${actionClass}`}
+           onClick={()=> router.push("/trades")}
+          >
            <span> <ImStatsBars2 className='text-xl'/></span>
            <span className='text-center '>Investments Plans</span>
           </div>
 {/* History */}
-          <div className={`${actionClass}`}>
+          <div className={`${actionClass}`}
+           onClick={()=> router.push("/investment-history")}
+          >
            <span> <MdHistory className='text-xl'/></span>
            <span>History</span>
           </div>

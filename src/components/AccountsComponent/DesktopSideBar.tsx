@@ -8,6 +8,14 @@ import { appDispatch, RootState } from '@/store';
 import gsap from 'gsap';
 import { closeMenu } from '@/store/slices/menubarSlice';
 import { useRouter } from 'next/navigation';
+import { PiHandDepositThin } from "react-icons/pi";
+import { PiHandWithdrawThin } from "react-icons/pi";
+import { MdAddCard } from "react-icons/md";
+import { MdHistory } from "react-icons/md";
+import { LuWallet } from "react-icons/lu";
+import { CiSettings } from "react-icons/ci";
+import { CiLogout } from "react-icons/ci";
+
 const buttonClass = "flex items-center py-4 gap-x-4 hover:text-primary font-medium transition-all duration-300 hover:pl-2"
 const iconClass = "text-[1.2rem]"
 
@@ -38,7 +46,7 @@ onClick={()=> router.push("/accounts/dashboard")}
 onClick={()=> router.push("/accounts/trades")}
 
 >
-    <span><IoHomeOutline className={iconClass}/></span>
+    <span><MdAddCard className={iconClass}/></span>
     <span>Invest</span>
 </button>
 </div>
@@ -50,35 +58,35 @@ onClick={()=> router.push("/accounts/trades")}
     <button className={buttonClass}
     onClick={()=> router.push("/accounts/deposit-method")}
     >
-    <span><IoHomeOutline className={iconClass}/></span>
+    <span>< PiHandDepositThin className={iconClass}/></span>
     <span>Deposit</span>
 </button>
     {/* withdrawals */}
     <button className={buttonClass}
     onClick={()=> router.push("/accounts/withdraw")}
     >
-    <span><IoHomeOutline className={iconClass}/></span>
+    <span><PiHandWithdrawThin className={iconClass}/></span>
     <span>withdrawals</span>
 </button>
     {/* Transaction History */}
     <button className={buttonClass}
     onClick={()=> router.push("/accounts/history")}
     >
-    <span><IoHomeOutline className={iconClass}/></span>
+    <span><MdHistory className={iconClass}/></span>
     <span>Transaction History</span>
 </button>
     {/* All Investments */}
     <button className={buttonClass}
     onClick={()=> router.push("/accounts/investment-history")}
     >
-    <span><IoHomeOutline className={iconClass}/></span>
+    <span><LuWallet className={iconClass}/></span>
     <span>All Investments</span>
 </button>
     {/* Settings */}
     <button className={buttonClass}
     onClick={()=> router.push("/accounts/settings")}
     >
-    <span><IoHomeOutline className={iconClass}/></span>
+    <span><CiSettings className={iconClass}/></span>
     <span>Settings</span>
 </button>
 </div>
@@ -92,7 +100,7 @@ onClick={()=> router.push("/accounts/trades")}
             router.push("/")
         }}
         className={buttonClass}>
-    <span><IoHomeOutline className={iconClass}/></span>
+    <span><CiLogout className={iconClass}/></span>
     <span> logout</span>
 </button>
 </div>
