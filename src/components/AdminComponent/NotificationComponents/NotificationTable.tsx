@@ -35,7 +35,7 @@ const dispatch = useDispatch<appDispatch>()
 //   const [notifications, setNotifications] = useState<Notification[]>(initialNotifications);
   const [selectedNotifications, setSelectedNotifications] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const notificationsPerPage = 10;
+  const notificationsPerPage = 50;
   
   const allNotificationsState = useSelector((state:RootState)=>{
 return state.allNotificationsReducer

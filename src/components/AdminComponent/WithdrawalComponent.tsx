@@ -61,7 +61,7 @@ const mutation = useMutation({
   const [purchases, setPurchases] = useState<any[]>(allWithdrawals);
   const [selectedPurchases, setSelectedPurchases] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const purchasesPerPage = 10;
+  const purchasesPerPage = 50;
 
   // Calculate pagination
   const indexOfLastPurchase = currentPage * purchasesPerPage;
