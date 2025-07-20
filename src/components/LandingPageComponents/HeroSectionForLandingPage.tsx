@@ -40,9 +40,10 @@ Grow Wealth,
 <br />
 Secure Your Future
 </h1>
-<p ref={paraRef} className='lg:w-[50%] w-[300px] text-sm'>Our investment platform is offering profitable
-  <br />
-investment opportunities to our customers</p>
+<p ref={paraRef} className='lg:w-[50%] w-[300px] text-sm'>
+*Grow your assets, protect your tomorrow with our trusted investment solutions."*Our investment platform provides rewarding opportunities tailored for your financial growth."
+
+</p>
 
 <button className='rounded-full w-[120px] text-center py-[10px] bg-primary text-white '>
 Get Started

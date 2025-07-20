@@ -135,7 +135,7 @@ console.log(formDetails);
     name='username'
         onChange={(e:React.ChangeEvent<HTMLInputElement>)=> {
 
-        setFormDetails({...formDetails,[e.target.name]:e.target.value})
+        setFormDetails({...formDetails,[e.target.name]:e.target.value.toLocaleLowerCase()})
     }}
     
     type="text" />
