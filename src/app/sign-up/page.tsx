@@ -11,11 +11,11 @@ import { useRouter } from 'next/navigation';
 import Loader from '@/components/Loader';
 import BtnLoader from '../../../utils/BtnLoader';
 
-const domainAddress = process.env.NEXT_PUBLIC_DOMAIN_ADDRESS
+// const domainAddress = process.env.NEXT_PUBLIC_DOMAIN_ADDRESS
 
 
 const postData = async(formDetails:any)=>{
-    const res = await fetch(`${domainAddress}/api/sign-up`,{
+    const res = await fetch(`/api/sign-up`,{
     method:"POST",
     headers:{
         "Content-Type":"application/json"
