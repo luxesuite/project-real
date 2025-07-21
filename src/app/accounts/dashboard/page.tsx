@@ -28,7 +28,7 @@ const router = useRouter()
       })
 
 
-      const totalBalance:number = userState.investment.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.profitReturn) , 0) + userState.bonus.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) + userState.deposit.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0)
+      const totalBalance:number = userState.investment.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.profitReturn) , 0) + userState.bonus.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) + userState.deposit.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) - userState.withdrawal.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0)
   useEffect(()=>{
 // console.log(user);
 // const getDetail = JSON.parse(localStorage.getItem("user") as string)

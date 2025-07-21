@@ -24,6 +24,25 @@ confirmed:string,
 date:string
 }
 
+const calculateReturn = (planChosen:string,amount:number):number=>{
+if (planChosen == "starter") {
+  return amount * 1.2
+}
+if (planChosen == "gold") {
+  return amount * 1.5
+}
+if (planChosen == "professional") {
+  return amount * 1.3
+}
+if (planChosen == "diamond") {
+  return amount * 1.3
+}
+
+return amount * 2
+
+
+}
+
 const page = () => {
   // Dummy data for users
   const users: User[] = [
@@ -71,7 +90,7 @@ const dispatch = useDispatch<appDispatch>()
     profitReturn: 0,
     amount:0,
     confirmed:"no",
-    plan:"",
+    plan:"starter",
     date:new Date().toLocaleString()
   })
 // const now = new Date();
@@ -104,6 +123,7 @@ const dispatch = useDispatch<appDispatch>()
 
   useEffect(()=>{
 console.log(formState);
+// setFormState({...formState,profitReturn:calculateReturn(formState.plan,formState.amount) })
 
   },[formState])
   const handlePlanChange = (selectedOption: {value: string, label: string} | null) => {
@@ -111,6 +131,7 @@ console.log(formState);
       ...prev,
       plan: selectedOption?.value || ''
     }));
+    
   };
 
   const handleReadStatusChange = (selectedOption: {value: string, label: string} | null) => {
@@ -196,6 +217,10 @@ return
         }
 fetchUsers()
     },[])
+
+    useEffect(()=>{
+setFormState({...formState,profitReturn:calculateReturn(formState.plan,formState.amount)})
+    },[formState.plan])
 
 //   useEffect(()=>{
 // console.log(allUsersState.length);
@@ -308,10 +333,14 @@ fetchUsers()
             Amount
           </label>
           <input 
-          
+         
           type="number" 
           className='min-h-[35px] border-[#d1d5db] border-1'
-          onChange={(e)=> setFormState({...formState,amount:Number(e.target.value) })}
+          onChange={(e)=> {
+            
+            setFormState({...formState,amount:Number(e.target.value),profitReturn:calculateReturn(formState.plan,Number(e.target.value)) })
+          //  setFormState({...formState, })
+          }}
           />
         </div>
         {/* Plan */}
@@ -353,8 +382,10 @@ fetchUsers()
           </label>
           <input
           type="number" 
+          value={Number(formState.profitReturn)}
+          readOnly
           className='min-h-[35px] border-[#d1d5db] border-1'
-           onChange={(e)=> setFormState({...formState,profitReturn:Number(e.target.value) })}
+          //  onChange={(e)=> setFormState({...formState,profitReturn:calculateReturn(formState.plan,formState.amount) })}
           />
         </div>
 

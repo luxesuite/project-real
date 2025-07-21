@@ -1,4 +1,8 @@
 import connectDb from "@/db/dbconnect";
+import Bonus from "@/models/bonusModel";
+import Deposit from "@/models/depositModel";
+import Investment from "@/models/investmentModel";
+import Notification from "@/models/notificationModel";
 // import Deposit from "@/models/depositModel";
 import User from "@/models/userModel";
 import Withdrawal from "@/models/withdrawalModel";
@@ -22,8 +26,27 @@ export const POST =async(req:NextRequest):Promise<NextResponse>=>{
         if (!checkIfUserExistInDbByUsername) {
             return NextResponse.json({message:"no user with this username",success:false})
         }
-
+   // CheckIf User Exists
+     const checkIfUserExists = await User.findOne({username:formDetails.username})
+    // Investment
+    const getUserInvestment = await Investment.find({username:checkIfUserExists.username})
+    // bonus
+    const getUserBonus = await Bonus.find({username:checkIfUserExists.username})
+    // Withdrawal
+    const getUserWithdrawal = await Withdrawal.find({username:checkIfUserExists.username})
+    // Notificatioon
+    // const getUserNotification = await Notification.find({username:checkIfUserExists.username})
+    // deposit
+    const getUserDepoit = await Deposit.find({username:checkIfUserExists.username})
     
+    // calclulate total balance
+       const totalBalance:number = getUserInvestment.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.profitReturn) , 0) + getUserBonus.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) + getUserDepoit.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) - getUserWithdrawal.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0)
+
+       if (formDetails.amount > totalBalance) {
+        return NextResponse.json({data:null,success:false,message:"Amount exceeds user balance"})
+       }
+
+
 const createNewWithdrawal = await Withdrawal.create(formDetails)
 
 if (createNewWithdrawal) {
