@@ -7,7 +7,8 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaTrash } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
-
+import { IoIosCheckmarkCircle } from "react-icons/io";
+import { MdCancel } from "react-icons/md";
 // type Purchase = {
 //   id: number;
 //   username: string;
@@ -21,6 +22,19 @@ import { useDispatch } from 'react-redux';
 
 const postData = async(formDetails:any)=>{
     const res = await fetch(`/api/admin/investment/delete-investment`,{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify(formDetails)
+
+
+})
+
+return res.json()
+}
+const editData = async(formDetails:any)=>{
+    const res = await fetch(`/api/admin/investment/confirm-investment`,{
     method:"POST",
     headers:{
         "Content-Type":"application/json"
@@ -83,9 +97,32 @@ const mutation = useMutation({
     }
 })
 
+// confirmd 
+
+const mutationConfirm = useMutation({
+    mutationFn:editData,
+    onSuccess:(data)=>{
+        console.log(data);
+        if (data.success) {
+          window.location.reload()
+        }
+        // if (data.message) {
+        //     dispatch(openModal(data.message))
+        // }
+        
+    },
+    onError:(error)=>{
+        console.log(error);
+        dispatch(openModal(error.message))
+        
+    }
+})
+
+
 
 const [purchases, setPurchases] = useState<any[]>(allInvestments);
 const [selectedPurchases, setSelectedPurchases] = useState<number[]>([]);
+const [purchaseToConfirm,setPurchaseToConfirm] = useState<any[]>([])
 const [currentPage, setCurrentPage] = useState(1);
 const purchasesPerPage = 50;
 
@@ -113,12 +150,25 @@ console.log("yea");
 console.log(selectedPurchases);
 
   },[selectedPurchases])
+
   const handleSelectAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedPurchases(e.target.checked ? currentPurchases.map(purchase => purchase._id) : []);
          setHistoryItems(e.target.checked ? currentPurchases : [])
   };
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  const handleInvestmentConfirm = async(id:any)=>{
+   if (purchaseToConfirm.length < 1 ) {
+    return
+   }
+    mutationConfirm.mutate(purchaseToConfirm)
+  }
+
+  useEffect(()=>{
+console.log("confirmed", purchaseToConfirm);
+
+  },[purchaseToConfirm])
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -130,6 +180,7 @@ console.log(selectedPurchases);
 return (
     <div className="max-w-full p-6">
       {/* Header and Actions */}
+      <h2 className="text-xl font-bold">Investment Records</h2>
   <div className='flex justify-end my-4'>
     <button className='bg-primary text-white rounded-lg p-2 cursor-pointer'
     onClick={()=>{
@@ -138,16 +189,27 @@ return (
     >Add Investment</button>
 </div>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold">Investment Records</h2>
+        {/* Confirmed investment */}
+                {purchaseToConfirm.length > 0 && (
+          <button
+            onClick={handleInvestmentConfirm}
+            className="bg-green-500 text-white md:px-4 md:py-2  p-2 rounded text-sm flex items-center gap-2 hover:bg-green-600 transition-colors"
+          >
+            {mutationConfirm.isPending ? "confirming.." :  <><FaTrash size={14} /> Confirm Investment</> }
+          </button>
+        )}
  
+ {/* delete investment */}
         {selectedPurchases.length > 0 && (
           <button
             onClick={handleDeleteSelected}
-            className="bg-red-500 text-white px-4 py-2 rounded text-sm flex items-center gap-2 hover:bg-red-600 transition-colors"
+            className="bg-red-500 text-white md:px-4 md:py-2 p-2 rounded text-sm flex items-center gap-2 hover:bg-red-600 transition-colors"
           >
             {mutation.isPending ? "deleting.." :  <><FaTrash size={14} /> Delete Selected</> }
           </button>
         )}
+ 
+
       </div>
 
       {/* Table Container */}
@@ -168,6 +230,7 @@ return (
             <div className="w-[200px] px-4 flex items-center">Created At</div>
             <div className="w-[250px] px-4 flex items-center">Plan</div>
             <div className="w-[150px] px-4 flex items-center">Profit Return</div>
+            <div className="w-[100px] px-4 flex items-center">Confirmed</div>
           </div>
 
           {/* Purchase Rows with alternating colors */}
@@ -188,6 +251,14 @@ return (
                   checked={selectedPurchases.includes(purchase._id)}
                    onChange={(e) =>{
  handleSelectPurchase(purchase._id, e.target.checked)
+if (purchase.confirmed !== "yes" && purchaseToConfirm.some(item => item == purchase._id) == false) {
+   setPurchaseToConfirm([...purchaseToConfirm,purchase._id])
+}
+if (purchaseToConfirm.some(item => item == purchase._id) == true) {
+  setPurchaseToConfirm(()=>{
+   return purchaseToConfirm.filter( item => item !== purchase._id)
+  })
+}
 
  const find = historyItems.some(his => his._id == purchase._id)
  if (find) {
@@ -216,6 +287,11 @@ setHistoryItems([...historyItems,purchase])
               </div>
               <div className="w-[150px] px-4">
                 {formatCurrency(purchase.profitReturn)}
+              </div>
+              <div className="w-[100px] px-4 flex justify-center">
+               {
+                 purchase.confirmed === "yes" ? <IoIosCheckmarkCircle className='text-green-500 text-lg' /> : <MdCancel className='text-red-500 text-lg' /> 
+               }
               </div>
             </div>
           ))}

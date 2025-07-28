@@ -16,11 +16,26 @@ export default function UserSlider() {
     { name: 'John Smith', country: 'United States', timeSpent: '$532' },
     { name: 'Maria Garcia', country: 'Spain', timeSpent: '$513' },
     { name: 'Chen Wei', country: 'China', timeSpent: '$1258' },
-    { name: 'Amina Mohammed', country: 'Nigeria', timeSpent: '$233' },
+    { name: 'Carlos Steven', country: 'England', timeSpent: '$233' },
     { name: 'Jean Dupont', country: 'France', timeSpent: '$805' },
     { name: 'Sakura Tanaka', country: 'Japan', timeSpent: '$1243' },
     { name: 'Carlos Silva', country: 'Brazil', timeSpent: '$1856' },
-    { name: 'Emma Johnson', country: 'Canada', timeSpent: '$577' }
+    { name: 'Emma Johnson', country: 'Canada', timeSpent: '$577' },
+    { name: "Emma Johnson", country: "USA", timeSpent: '$329' },
+  { name: "Liam Smith", country: "Canada", timeSpent: '$353' },
+  { name: "Olivia Brown", country: "UK", timeSpent: '$512' },
+  { name: "Noah Wilson", country: "Australia", timeSpent: '$623' },
+  { name: "Ava Taylor", country: "USA", timeSpent: '$432' },
+  { name: "William Martinez", country: "Spain", timeSpent: '$460' },
+  { name: "Sophia Anderson", country: "Canada", timeSpent: '$183' },
+  { name: "James Lee", country: "South Korea", timeSpent: '$350' },
+  { name: "Isabella Garcia", country: "Mexico", timeSpent: '$712'},
+  { name: "Benjamin Rodriguez", country: "Argentina", timeSpent: '$903' },
+  { name: "Mia Hernandez", country: "USA", timeSpent: '$803' },
+  { name: "Lucas Lopez", country: "Brazil", timeSpent: '$432' },
+  { name: "Charlotte Gonzalez", country: "Chile", timeSpent: '$534' },
+  { name: "Henry Perez", country: "Peru", timeSpent: '$458' },
+  { name: "Amelia Sanchez", country: "Colombia", timeSpent: '$850' }
   ];
 const pathname = usePathname()
   const bannerRef = useRef<HTMLDivElement>(null);

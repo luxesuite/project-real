@@ -35,7 +35,7 @@ const router = useRouter()
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 768);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const usersPerPage = 10;
+  const usersPerPage = 50;
 
   // Calculate pagination
   const indexOfLastUser = currentPage * usersPerPage;

@@ -39,7 +39,7 @@ const mutation = useMutation({
                     console.log(data);
                     if (data.data.userDetails.role !== "admin") {
                       // router.push("/admin/sign-in")
-                      window.alert("not and admin")
+                      window.alert("not an admin")
                       return
                     }
                 router.push("/admin")
