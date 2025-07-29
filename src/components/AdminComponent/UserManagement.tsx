@@ -66,8 +66,8 @@ const UserManagement: React.FC<UserManagementProps> = () => {
     })
 const router = useRouter()
    
-  const [allUsers, setAllUsers] = useState<any>(dateSort(allUsersState));
-  const [filteredUsers, setFilteredUsers] = useState<any>(dateSort(allUsersState));
+  const [allUsers, setAllUsers] = useState<any>(allUsersState);
+  const [filteredUsers, setFilteredUsers] = useState<any>(allUsersState);
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [selectedLetter, setSelectedLetter] = useState<string>('');
   const [selectedRole, setSelectedRole] = useState<'all' | 'admin' | 'user'>('all');
@@ -76,14 +76,14 @@ const router = useRouter()
   const [currentPage, setCurrentPage] = useState<number>(1);
   const usersPerPage = 50;
 
-function dateSort(items:any[]){
-   const sortedItems = [...items].sort((a, b) => {
-    const dateA:any = parse(a.date, "M/d/yyyy, h:mm:ss a", new Date());
-    const dateB:any = parse(b.date, "M/d/yyyy, h:mm:ss a", new Date());
-    return dateB - dateA;
-  });
-  return sortedItems
-}
+// function dateSort(items:any[]){
+//    const sortedItems = [...items].sort((a, b) => {
+//     const dateA:any = parse(a.date, "M/d/yyyy, h:mm:ss a", new Date());
+//     const dateB:any = parse(b.date, "M/d/yyyy, h:mm:ss a", new Date());
+//     return dateB - dateA;
+//   });
+//   return sortedItems
+// }
 
   // Calculate pagination
   const indexOfLastUser = currentPage * usersPerPage;
