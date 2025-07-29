@@ -430,8 +430,8 @@ console.log(selectedUsers);
                 <div className="flex-[2] min-w-[150px]">Username</div>
                 <div className="flex-[3] min-w-[200px]">Email</div>
                 <div className="flex-[2] min-w-[120px]">First Name</div>
-                <div className="flex-[2] min-w-[120px]">Last Name</div>
                 <div className="flex-1 min-w-[100px]">Role</div>
+                <div className="flex-[2] min-w-[120px]">Action</div>
               </div>
 
               {/* User Rows */}
@@ -440,16 +440,15 @@ console.log(selectedUsers);
                   <div key={user._id} className={`flex items-center p-3 border-b border-gray-300 ${selectedUsers.includes(user._id) ? 'bg-gray-50' : ''} ${index % 2 === 0 ? 'bg-lightPrimary' : ''}`}>
                     <div className="w-12">
                       <input 
-                        type="checkbox" 
+                         type="checkbox" 
                         checked={selectedUsers.includes(user._id)}
-                        onChange={(e) => handleSelectUser(user.id, e.target.checked)}
+                        onChange={(e) => handleSelectUser(user._id, e.target.checked)}
                         className="cursor-pointer"
                       />
                     </div>
                     <div className="flex-[2] min-w-[150px]">{user.username}</div>
                     <div className="flex-[3] min-w-[200px]">{user.email}</div>
                     <div className="flex-[2] min-w-[120px]">{user.name}</div>
-                    <div className="flex-[2] min-w-[120px]">{user.lastName}</div>
                     <div className="flex-1 min-w-[100px]">
                       {user.role === 'admin' ? (
                         <FaUserShield className="text-green-500" />
@@ -457,6 +456,10 @@ console.log(selectedUsers);
                         <FaUser className="text-red-500" />
                       )}
                     </div>
+                    
+                      <div className="flex-[2] min-w-[120px]"><button className='bg-red-500 rounded-lg px-2 py-1 text-white cursor-pointer'
+                        onClick={()=> handleClearFunds(user.username)}
+                        >Clear Funds</button></div>
                   </div>
                 ))
               ) : (
