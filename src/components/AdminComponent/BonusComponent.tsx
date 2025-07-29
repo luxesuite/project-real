@@ -11,6 +11,7 @@ import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { postHistory } from '../../../utils/AdminUtils/AddHistory';
+import { dateSort } from '../../../utils/dateSort';
 
 
 const postData = async(formDetails:any)=>{
@@ -61,7 +62,7 @@ const mutation = useMutation({
   const router = useRouter()
 
 // purchase is used for the bonus state coming from the parent compoent
-  const [purchases, setPurchases] = useState<any[]>(allBonuses);
+  const [purchases, setPurchases] = useState<any[]>(dateSort(allBonuses));
   const [selectedPurchases, setSelectedPurchases] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const purchasesPerPage = 50;

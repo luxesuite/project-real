@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaEnvelope, FaEnvelopeOpen, FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { postHistory } from '../../../../utils/AdminUtils/AddHistory';
+import { dateSort } from '../../../../utils/dateSort';
 
 type ActionType = 'bonus' | 'withdrawal' | 'investment' | 'signup' | 'deposit';
 
@@ -180,7 +181,7 @@ console.log(selectedNotifications);
           </div>
 
           {/* Notification Rows */}
-          {allNotificationsState.map((notification:any) => (
+          {dateSort(allNotificationsState).map((notification:any) => (
             <div 
               key={notification._id} 
               className={`flex items-center p-2 border-b border-gray-200 text-sm ${

@@ -9,6 +9,8 @@ import { FaChevronLeft, FaChevronRight, FaTrash } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { MdCancel } from "react-icons/md";
+import { format, parse } from 'date-fns';
+import { dateSort } from '../../../../utils/dateSort';
 // type Purchase = {
 //   id: number;
 //   username: string;
@@ -120,7 +122,7 @@ const mutationConfirm = useMutation({
 
 
 
-const [purchases, setPurchases] = useState<any[]>(allInvestments);
+const [purchases, setPurchases] = useState<any[]>(dateSort(allInvestments));
 const [selectedPurchases, setSelectedPurchases] = useState<number[]>([]);
 const [purchaseToConfirm,setPurchaseToConfirm] = useState<any[]>([])
 const [currentPage, setCurrentPage] = useState(1);
@@ -138,6 +140,9 @@ const router = useRouter()
       isChecked ? [...prev, id] : prev.filter(purchaseId => purchaseId !== id)
     );
   };
+
+
+
 
   const handleDeleteSelected = () => {
     if (selectedPurchases.length === 0 || !window.confirm('Are you sure you want to delete the selected purchases?')) return;

@@ -30,7 +30,7 @@ const page = () => {
                           <span>{item.plan}</span>
                              <span>{item.date.split(",")[0]}</span>
                              <span>${item.amount}</span>
-                             <span className='text-green-800'>${item.profitReturn}</span>
+                             <span className='text-green-800'>${item.confirmed == "yes" ? item.profitReturn : "0"}</span>
                              <span>{item.confirmed == "yes" ? < FaCheckCircle className='text-green-500'/> : <BsExclamationCircleFill className='text-orange-400'/>}</span>
                          </div>
                      })}

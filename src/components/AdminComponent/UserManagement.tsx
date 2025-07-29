@@ -1,10 +1,14 @@
 'use client';
 
-import { RootState } from '@/store';
+import { appDispatch, RootState } from '@/store';
+import { openModal } from '@/store/slices/modalSlice';
+import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 import { FaCheck, FaTimes, FaFilter, FaUserShield, FaUser, FaChevronLeft, FaChevronRight, FaSearch, FaPlus } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { postHistory } from '../../../utils/AdminUtils/AddHistory';
+import { format, parse } from 'date-fns';
 
 // type User = {
 //   id: number;
@@ -18,17 +22,52 @@ import { useSelector } from 'react-redux';
 type UserManagementProps = {
   // Props can be added here if needed
 };
+const deleteFunds = async(username:string)=>{
+    const res = await fetch(`/api/admin/clear-user-data`,{
+    method:"POST",
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify(username)
+
+
+})
+
+return res.json()
+}
 
 const UserManagement: React.FC<UserManagementProps> = () => {
-
+    const dispatch = useDispatch<appDispatch>()
+    const [historyItems,setHistoryItems] = useState<any[]>([])
       const allUsersState = useSelector((state:RootState)=>{
 
         return state.allUsersReducer
     })
+
+    const mutation = useMutation({
+      mutationFn:deleteFunds,
+      onSuccess:(data)=>{
+              console.log(data);
+              if (data.success) {
+         postHistory({username:data.data.username,actionPerformed:"Cleared Funds",action:"funds cleared"})
+                window.location.reload()
+              }
+              // if (data.message) {
+              //     dispatch(openModal(data.message))
+              // }
+              
+          },
+          onError:(error)=>{
+              console.log(error);
+              dispatch(openModal(error.message))
+              
+          }
+
+    })
 const router = useRouter()
    
-  const [allUsers, setAllUsers] = useState<any>(allUsersState);
-  const [filteredUsers, setFilteredUsers] = useState<any>(allUsersState);
+  const [allUsers, setAllUsers] = useState<any>(dateSort(allUsersState));
+  const [filteredUsers, setFilteredUsers] = useState<any>(dateSort(allUsersState));
   const [selectedUsers, setSelectedUsers] = useState<number[]>([]);
   const [selectedLetter, setSelectedLetter] = useState<string>('');
   const [selectedRole, setSelectedRole] = useState<'all' | 'admin' | 'user'>('all');
@@ -36,6 +75,15 @@ const router = useRouter()
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 768);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const usersPerPage = 50;
+
+function dateSort(items:any[]){
+   const sortedItems = [...items].sort((a, b) => {
+    const dateA:any = parse(a.date, "M/d/yyyy, h:mm:ss a", new Date());
+    const dateB:any = parse(b.date, "M/d/yyyy, h:mm:ss a", new Date());
+    return dateB - dateA;
+  });
+  return sortedItems
+}
 
   // Calculate pagination
   const indexOfLastUser = currentPage * usersPerPage;
@@ -51,6 +99,18 @@ const router = useRouter()
 // setAllUsers(allUsersState)
 //   },[allUsersState])
   
+
+const handleClearFunds = (username:string)=>{
+  if (confirm("are you sure you want to clear all the funds of "+ username.toLocaleUpperCase() )) {
+    // console.log("delete");
+    mutation.mutate(username)
+    
+  }
+  else{
+    console.log("dont delete");
+    
+  }
+}
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -203,8 +263,8 @@ console.log(selectedUsers);
                 <div className="flex-[2] min-w-[150px]">Username</div>
                 <div className="flex-[3] min-w-[200px]">Email</div>
                 <div className="flex-[2] min-w-[120px]">First Name</div>
-                <div className="flex-[2] min-w-[120px]">Last Name</div>
                 <div className="flex-1 min-w-[100px]">Role</div>
+                <div className="flex-[2] min-w-[120px]">Action</div>
               </div>
 
               {/* User Rows */}
@@ -222,7 +282,6 @@ console.log(selectedUsers);
                     <div className="flex-[2] min-w-[150px]">{user.username}</div>
                     <div className="flex-[3] min-w-[200px]">{user.email}</div>
                     <div className="flex-[2] min-w-[120px]">{user.name}</div>
-                    <div className="flex-[2] min-w-[120px]">{user.lastName}</div>
                     <div className="flex-1 min-w-[100px]">
                       {user.role === 'admin' ? (
                         <FaUserShield className="text-green-500" />
@@ -230,6 +289,11 @@ console.log(selectedUsers);
                         <FaUser className="text-red-500" />
                       )}
                     </div>
+                      <div className="flex-[2] min-w-[120px]  ">
+                        <button className='bg-red-500 rounded-lg px-2 py-1 text-white cursor-pointer'
+                        onClick={()=> handleClearFunds(user.username)}
+                        >Clear Funds</button>
+                      </div>
                   </div>
                 ))
               ) : (

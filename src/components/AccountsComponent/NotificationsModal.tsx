@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { IoClose } from "react-icons/io5";
 import { closeNotificationsModal } from '@/store/admin-slices/notificationModelSlice';
+import { dateSort } from '../../../utils/dateSort';
 
 
 const btn = ["all","investment","deposit","bonus","withdrawal"]
@@ -98,7 +99,7 @@ else if (item.action == "investment") {
             <span className='text-primary'>{item.action}</span>
         </header>
      <div className='bg-lightPrimary rounded-md  my-4 p-2 '>
-        Congratulations {item.username}, your ${item.amount} {item.plan} investment gave a profit of ${item.profitReturn}
+        Congratulations {item.username}, your ${item.amount} {item.plan} investment gave a profit of ${item.confirmed == "yes" ? item.profitReturn : "0"}
      </div>
     </div>
 }
@@ -121,7 +122,7 @@ else if (item.action == "withdrawal") {
     )}
 
   {/* Deposit */}
-    {currentBtn == "deposit" && userState[currentBtn] && userState[currentBtn].length > 0 && userState[currentBtn].map((item:any,index:number)=>{
+    {currentBtn == "deposit" && userState[currentBtn] && userState[currentBtn].length > 0 && dateSort(userState[currentBtn]).map((item:any,index:number)=>{
         return <div key={item._id} className='border-1 border-[#6d6c6c5a] rounded-lg px-4 py-2 my-2'>
         <header className='flex justify-between items-center'>
             <span>{item.date.split(",")[0]}</span>
@@ -133,19 +134,19 @@ else if (item.action == "withdrawal") {
     </div>
     })}
     {/* Investment */}
- {currentBtn == "investment" && userState[currentBtn] && userState[currentBtn].length > 0 && userState[currentBtn].map((item:any,index:number)=>{
+ {currentBtn == "investment" && userState[currentBtn] && userState[currentBtn].length > 0 && dateSort(userState[currentBtn]).map((item:any,index:number)=>{
         return <div key={item._id} className='border-1 border-[#6d6c6c5a] rounded-lg px-4 py-2 my-2'>
         <header className='flex justify-between items-center'>
             <span>{item.date.split(",")[0]}</span>
             <span className='text-primary'>{currentBtn}</span>
         </header>
      <div className='bg-lightPrimary rounded-md  my-4 p-2 '>
-        Congratulations {item.username}, your ${item.amount} {item.plan} investment gave a profit of ${item.profitReturn}
+        Congratulations {item.username}, your ${item.amount} {item.plan} investment gave a profit of ${item.confirmed == "yes" ? item.profitReturn : "0"}
      </div>
     </div>
     })}
     {/* Bonus */}
- {currentBtn == "bonus" && userState[currentBtn] && userState[currentBtn].length > 0 && userState[currentBtn].map((item:any,index:number)=>{
+ {currentBtn == "bonus" && userState[currentBtn] && userState[currentBtn].length > 0 && dateSort(userState[currentBtn]).map((item:any,index:number)=>{
         return <div key={item._id} className='border-1 border-[#6d6c6c5a] rounded-lg px-4 py-2 my-2'>
         <header className='flex justify-between items-center'>
             <span>{item.date.split(",")[0]}</span>
@@ -157,7 +158,7 @@ else if (item.action == "withdrawal") {
     </div>
     })}
     {/* Withdrawal */}
- {currentBtn == "withdrawal" && userState[currentBtn] && userState[currentBtn].length > 0 && userState[currentBtn].map((item:any,index:number)=>{
+ {currentBtn == "withdrawal" && userState[currentBtn] && userState[currentBtn].length > 0 && dateSort(userState[currentBtn]).map((item:any,index:number)=>{
         return <div key={item._id} className='border-1 border-[#6d6c6c5a] rounded-lg px-4 py-2 my-2'>
         <header className='flex justify-between items-center'>
             <span>{item.date.split(",")[0]}</span>

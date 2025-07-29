@@ -28,7 +28,11 @@ const router = useRouter()
       })
 
 
-      const totalBalance:number = userState.investment.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.profitReturn) , 0) + userState.bonus.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) + userState.deposit.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) - userState.withdrawal.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0)
+      const totalBalance:number = userState.investment.reduce((acc:number,curr:any)=> {
+        if (curr.confirmed == "no") {
+          return Number(acc) + 0
+        }
+       return Number(acc) + Number(curr.profitReturn)} , 0) + userState.bonus.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) + userState.deposit.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) - userState.withdrawal.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0)
   useEffect(()=>{
 // console.log(user);
 // const getDetail = JSON.parse(localStorage.getItem("user") as string)
@@ -58,7 +62,11 @@ console.log(userState.investment.reduce((acc:number,curr:any)=> Number(acc) + Nu
   {/* Investment Earning */}
   <div className={`${statsClass}  bg-blue-200`}>
     <span className='mdlg:text-md text-[0.8rem]'>Investment Earning</span>
-    <span className='text-blue-600 text-lg'>+${userState.investment.length > 0 ? userState.investment.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.profitReturn) , 0):"0"}</span>
+    <span className='text-blue-600 text-lg'>+${userState.investment.length > 0 ? userState.investment.reduce((acc:number,curr:any)=> {
+        if (curr.confirmed == "no") {
+          return Number(acc) + 0
+        }
+       return Number(acc) + Number(curr.profitReturn)} , 0):"0"}</span>
   </div>
 
   {/* Bonuses */}

@@ -13,6 +13,7 @@ import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { postHistory } from '../../../utils/AdminUtils/AddHistory';
+import { dateSort } from '../../../utils/dateSort';
 
 
 const postData = async(formDetails:any)=>{
@@ -150,7 +151,7 @@ console.log(selectedPurchases);
           </div>
 
           {/* Purchase Rows with alternating colors */}
-          {purchases.map((item:any, index:number) => (
+          {dateSort(purchases).map((item:any, index:number) => (
             <div 
               key={item._id} 
               className={`flex items-center p-4 border-b border-gray-200 text-sm ${
