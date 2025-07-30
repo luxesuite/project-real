@@ -7,6 +7,7 @@ import Modal from "@/components/Modal";
 import ProviderQuery from "@/components/ProviderQuery";
 import SmartSupp from "@/components/SmartSupp";
 import UserSlider from "@/components/UserSlide";
+import TelegramButton from "@/components/TelegramComponent";
 
 export const metadata: Metadata = {
   title: "Real Vista",
@@ -51,13 +52,14 @@ export default function RootLayout({
 />
 {/* SmartSupp */}
 
-        <SmartSupp/>
+        {/* <SmartSupp/> */}
       </head>
 
      
       <body
         className={`font-jakarta text-[0.8rem] `}
         >
+          <TelegramButton/>
            {/* <div className="gtranslate_wrapper" style={{ padding: '10px' }} /> */}
        <Modal/>
        <UserSlider/>
