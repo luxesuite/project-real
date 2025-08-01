@@ -112,7 +112,7 @@ console.log(formDetails);
     placeholder='username'
     name='username'
     onChange={(e)=>{
-        setFormDetails({...formDetails,[e.target.name]:e.target.value.toLocaleLowerCase()})
+        setFormDetails({...formDetails,[e.target.name]:e.target.value.toLocaleLowerCase().trim()})
     }}
     type="text" />
 </div>
@@ -139,7 +139,7 @@ console.log(formDetails);
        
     name='password'
     onChange={(e)=>{
-        setFormDetails({...formDetails,[e.target.name]:e.target.value})
+        setFormDetails({...formDetails,[e.target.name]:e.target.value.trim()})
     }}
     type={showPassword.password ? "text" : "password"} />
     </aside>

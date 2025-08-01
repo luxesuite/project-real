@@ -121,7 +121,7 @@ console.log(formDetails);
     name='name'
     onChange={(e:React.ChangeEvent<HTMLInputElement>)=> {
 
-        setFormDetails({...formDetails,[e.target.name]:e.target.value})
+        setFormDetails({...formDetails,[e.target.name]:e.target.value.toLocaleLowerCase()})
     }}
     
     type="text" />
@@ -135,7 +135,7 @@ console.log(formDetails);
     name='username'
         onChange={(e:React.ChangeEvent<HTMLInputElement>)=> {
 
-        setFormDetails({...formDetails,[e.target.name]:e.target.value.toLocaleLowerCase()})
+        setFormDetails({...formDetails,[e.target.name]:e.target.value.toLocaleLowerCase().trim()})
     }}
     
     type="text" />
@@ -149,7 +149,7 @@ console.log(formDetails);
     name='email'
         onChange={(e:React.ChangeEvent<HTMLInputElement>)=> {
 
-        setFormDetails({...formDetails,[e.target.name]:e.target.value})
+        setFormDetails({...formDetails,[e.target.name]:e.target.value.toLocaleLowerCase().trim()})
     }}
     type="email" />
 </div>
@@ -175,7 +175,7 @@ console.log(formDetails);
     name='password'
         onChange={(e:React.ChangeEvent<HTMLInputElement>)=> {
 
-        setFormDetails({...formDetails,[e.target.name]:e.target.value})
+        setFormDetails({...formDetails,[e.target.name]:e.target.value.trim()})
     }}
    
     type={showPassword.password ? "text" : "password"} />
@@ -205,7 +205,7 @@ console.log(formDetails);
     value={confirmPassword}
         onChange={(e:React.ChangeEvent<HTMLInputElement>)=> {
 
-        setConfirmPassword(e.target.value)
+        setConfirmPassword(e.target.value.trim())
     }}
     type={showPassword.confirmPassword ? "text" : "password"} />
     </aside>
