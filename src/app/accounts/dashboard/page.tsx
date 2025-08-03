@@ -30,7 +30,7 @@ const router = useRouter()
 
       const totalBalance:number = userState.investment.reduce((acc:number,curr:any)=> {
         if (curr.confirmed == "no") {
-          return Number(acc) + 0
+          return Number(acc) + Number(curr.amount)
         }
        return Number(acc) + Number(curr.profitReturn)} , 0) + userState.bonus.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) + userState.deposit.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0) - userState.withdrawal.reduce((acc:number,curr:any)=> Number(acc) + Number(curr.amount) , 0)
   useEffect(()=>{
@@ -64,7 +64,7 @@ console.log(userState.investment.reduce((acc:number,curr:any)=> Number(acc) + Nu
     <span className='mdlg:text-md text-[0.8rem]'>Investment Earning</span>
     <span className='text-blue-600 text-lg'>+${userState.investment.length > 0 ? userState.investment.reduce((acc:number,curr:any)=> {
         if (curr.confirmed == "no") {
-          return Number(acc) + 0
+          return Number(acc) + Number(curr.amount)
         }
        return Number(acc) + Number(curr.profitReturn)} , 0):"0"}</span>
   </div>
@@ -139,12 +139,12 @@ console.log(userState.investment.reduce((acc:number,curr:any)=> Number(acc) + Nu
       {userState.investment.length < 1 &&  <article className='text-red-600'>
   <p className='flex gap-x-2 items-center'><span><AiOutlineExclamationCircle/></span>  <span >No Investments made</span></p>
   </article>}
-             {userState.investment.length > 0 &&  userState.investment.map((item:any,index:number)=>{
+             {userState.investment.length > 0 &&  [...userState.investment].reverse().map((item:any,index:number)=>{
                          return <div key={index} className='flex justify-between items-center bg-gray-300 p-4 rounded-lg my-3'>
                           <span>{item.plan}</span>
                              <span>{item.date.split(",")[0]}</span>
                              <span>${item.amount}</span>
-                             <span className='text-green-800'>${item.profitReturn}</span>
+                             <span className='text-green-800'>${item.confirmed == "yes" ?  item.profitReturn : 0 }</span>
                              <span>{item.confirmed == "yes" ? < FaCheckCircle className='text-green-500'/> : <BsExclamationCircleFill className='text-orange-400'/>}</span>
                          </div>
                      })}

@@ -25,7 +25,8 @@ const page = () => {
        {userState.investment.length < 1 &&  <article className='text-red-600'>
   <p className='flex gap-x-2 items-center'><span><AiOutlineExclamationCircle/></span>  <span >No Investments made</span></p>
   </article>}
-             {userState.investment.length > 0 &&  userState.investment.map((item:any,index:number)=>{
+  
+             {userState.investment.length > 0 &&  [...userState.investment].reverse().map((item:any,index:number)=>{
                          return <div key={index} className='flex justify-between items-center bg-gray-300 p-4 rounded-lg my-3'>
                           <span>{item.plan}</span>
                              <span>{item.date.split(",")[0]}</span>
