@@ -23,7 +23,7 @@ background-repeat: no-repeat;
 }
 
 .animate-marquee {
-  /* color: #5cf05c */
+  /* color: #029102 */
   animation: marquee 20s linear infinite;
 }
 
@@ -38,9 +38,15 @@ background-repeat: no-repeat;
   /* --color-primary: #940094 ;
   --color-lightPrimary: #fce1fc ;
   --color-primaryShade: #fb9bfb ; */
-  --color-primary: #06c306;        /* main green */
---color-lightPrimary: #d6f5d6;   /* very light green */
---color-primaryShade: #5cf05c;   
+  /* green */
+  /* --color-primary:#029102;      
+--color-lightPrimary: #d6f5d6;   
+--color-primaryShade: #5cf05c;    */
+
+--color-primary: #002366;        /* classic navy blue */
+--color-lightPrimary: #dce4ff;   /* pale blue highlight */
+--color-primaryShade: #0047ab;   /* royal blue accent */
+
 
   --color-white: #ffffff ;
   --color-dark: #171515 ;
