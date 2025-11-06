@@ -23,6 +23,7 @@ background-repeat: no-repeat;
 }
 
 .animate-marquee {
+  /* color: #5cf05c */
   animation: marquee 20s linear infinite;
 }
 
@@ -34,9 +35,13 @@ background-repeat: no-repeat;
 /* stylelint-disable-next-line */
 @theme{
 /* Colors */
-  --color-primary: #940094 ;
+  /* --color-primary: #940094 ;
   --color-lightPrimary: #fce1fc ;
-  --color-primaryShade: #fb9bfb ;
+  --color-primaryShade: #fb9bfb ; */
+  --color-primary: #06c306;        /* main green */
+--color-lightPrimary: #d6f5d6;   /* very light green */
+--color-primaryShade: #5cf05c;   
+
   --color-white: #ffffff ;
   --color-dark: #171515 ;
   --color-lightDark: #374151 ;
