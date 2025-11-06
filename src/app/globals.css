@@ -23,7 +23,7 @@ background-repeat: no-repeat;
 }
 
 .animate-marquee {
-  /* color: #029102 */
+  /* color: #033c8b; */
   animation: marquee 20s linear infinite;
 }
 

@@ -45,7 +45,7 @@ const InvestmentPlansComponent = () => {
 
         
   return (
-    <div className='mb-16  mt-32 mx-6 lg:mx-16 text-lightDark text-[0.85rem]'>
+    <div className='mb-16  mt-32 mx-6 lg:mx-16 text-white text-[0.85rem]'>
     <div className='text-center flex flex-col items-center ' ref={headerContainer}>
         <h1 className='font-semibold  text-[1.5rem] scaleAnimate' >Investment plans</h1>
         <p className='mdlg:w-[75%] scaleAnimate'>The RealVista shares limitedprovided with modern and reliable EV SSL encryption protocol and guarantees the security of confidential data.</p>
@@ -68,8 +68,8 @@ const InvestmentPlansComponent = () => {
           <span>
         <IoCardOutline />
           </span>
-          <h1 className='text-[0.7rem]'>Capital Range</h1>
-          <h1 className='text-primary font-semibold'>{item.capitalRange}</h1>
+          <h1 className='text-[0.7rem]'>Capital</h1>
+          <h1 className=' font-semibold'>{item.capitalRange}</h1>
         </aside>
         {/* profit period */}
         <aside className='bg-primaryShade w-[45%] flex flex-col justify-between py-2 px-4 rounded-sm' >
@@ -77,7 +77,7 @@ const InvestmentPlansComponent = () => {
           <IoAlarmOutline />
           </span>
           <h1 className='text-[0.7rem]'>Profit Period</h1>
-          <h1 className='text-primary font-semibold'>{item.profitPeriod}</h1>
+          <h1 className=' font-semibold'>{item.profitPeriod}</h1>
         </aside>
 
       </section>
