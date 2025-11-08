@@ -14,10 +14,10 @@ const ContactInfo = () => {
             <FaLocationDot size={30} className="text-primary"/> <span>C/O 32 Castlewood Road, London, United Kingdom, N16 6DW</span></div>
             {/* Mail */}
         <div className="flex gap-x-4 my-4 hover:text-footerTextOne cursor-pointer">
-            <IoMailUnreadSharp size={30}  className="text-primary"/> <span>C/O 32 Castlewood Road, London, United Kingdom, N16 6DW</span></div>
+            <IoMailUnreadSharp size={30}  className="text-primary"/> <span>realvistaglobalwealth@gmail.com</span></div>
             {/* Vip */}
         <div className="flex gap-x-4 my-4 hover:text-footerTextOne cursor-pointer">
-            <IoCall  size={30}  className="text-primary" /> <span>C/O 32 Castlewood Road, London, United Kingdom, N16 6DW</span></div>
+            <IoCall  size={30}  className="text-primary" /> <span>+1 (313) 697-8902</span></div>
       </section>
     </div>
   )
